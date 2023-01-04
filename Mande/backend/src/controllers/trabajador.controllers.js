@@ -15,3 +15,5 @@ trabajador.updateTrabajador = (req, res) => {
 trabajador.deleteTrabajador = (req, res) => {
     res.send("Eliminar trabajador");
 };
+
+module.exports = trabajador;
