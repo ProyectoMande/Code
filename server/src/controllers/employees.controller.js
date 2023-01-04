@@ -7,3 +7,9 @@ empCtrl.getEmployee = (req,res) => {res.send('getting employee')} //un empleado
 empCtrl.updateEmployee = (req,res) => {res.send('updating employees')}
 empCtrl.deleteEmployee = (req,res) => {res.send('deleating employees')}
 module.exports = empCtrl
+
+const {Pool} = require('pg');
+
+new Pool({
+    
+})
