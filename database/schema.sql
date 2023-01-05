@@ -37,7 +37,20 @@ CREATE TABLE usuario(
     tarjeta_cvv TEXT NOT NULL --Encriptado MD5
 );
 
+-- Tabla labor
 CREATE TABLE labor(
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(20)
+);
+
+-- Tabla trabajdor_labor
+CREATE TABLE trabajador_labor(
+    celular_trabajador VARCHAR(20) NOT NULL,
+    id_labor INTEGER,
+    precio_hora INTEGER,
+    PRIMARY KEY(celular_trabajador, id_labor),
+    CONSTRAINT fk_trabajador_trabajador_labor
+        FOREIGN KEY (celular_trabajador) REFERENCES trabajador(celular),
+    CONSTRAINT fk_labor_trabajador_labor
+        FOREIGN KEY (id_labor) REFERENCES labor(id)
 );
