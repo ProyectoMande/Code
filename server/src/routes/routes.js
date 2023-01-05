@@ -25,10 +25,10 @@ router.post('/trabajador', trabajadorCtrl.addTrabajador);
 router.get('/trabajador', trabajadorCtrl.getTrabajador);
 
 // Eliminar trabajador
-router.delete('/trabajador', trabajadorCtrl.deleteTrabajador);
+router.delete('/trabajador/:celular', trabajadorCtrl.deleteTrabajador);
 
 // Actualizar trabajador
-router.put('/trabajador', trabajadorCtrl.updateTrabajador);
+router.put('/trabajador/:celular', trabajadorCtrl.updateTrabajador);
 
 // Se exporta el objeto router
 // Es decir, cuando se importe este archivo, se importara dicho objeto
