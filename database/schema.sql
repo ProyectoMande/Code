@@ -36,3 +36,8 @@ CREATE TABLE usuario(
     tarjeta_fecha_vencimiento TEXT NOT NULL, --Encriptado MD5
     tarjeta_cvv TEXT NOT NULL --Encriptado MD5
 );
+
+CREATE TABLE labor(
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(20)
+);
