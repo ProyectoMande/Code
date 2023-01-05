@@ -10,8 +10,11 @@ app.set('port',process.env.PORT || 4000)
 //para usar en el scrip de dev
 app.use(morgan('dev'))
 
-//cada vez que requiramos la ruta /api/employees  se trabajara con /routes/employees.routes
-app.use("/api/employees",require('./routes/employees.routes'))
+// para recibir json
+app.use(express.json());
+
+//cada vez que requiramos la ruta /api/trabajador  se trabajara con /routes/routes
+app.use("/api/trabajador",require('./routes/trabajador.routes'))
  
 
 //exportamos el archivo
