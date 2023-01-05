@@ -67,3 +67,15 @@ CREATE TABLE solicitud(
     CONSTRAINT fk_usuario_solicitud
         FOREIGN KEY (celular_usuario) REFERENCES usuario(celular)
 );
+
+-- Tabla calificacion
+CREATE TABLE calificacion(
+    celular_usuario VARCHAR(20) NOT NULL,
+    id_solicitud INTEGER NOT NULL,
+    calificacion INTEGER NOT NULL,
+    PRIMARY KEY(celular_usuario, id_solicitud),
+    CONSTRAINT fk_usuario_calificacion
+        FOREIGN KEY (celular_usuario) REFERENCES usuario(celular),
+    CONSTRAINT fk_solicitud_calificacion
+        FOREIGN KEY (id_solicitud) REFERENCES solicitud(id)
+);
