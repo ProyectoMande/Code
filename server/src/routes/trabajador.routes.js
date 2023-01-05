@@ -24,6 +24,9 @@ router.post('/', trabajadorCtrl.addTrabajador);
 // Ver trabajadores
 router.get('/', trabajadorCtrl.getTrabajador);
 
+// Obtener trabajador
+router.get('/:celular', trabajadorCtrl.getTrabajador);
+
 // Eliminar trabajador
 router.delete('/:celular', trabajadorCtrl.deleteTrabajador);
 
