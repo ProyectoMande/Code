@@ -23,3 +23,16 @@ CREATE TABLE trabajador(
     foto_perfil BYTEA,
     img_id BYTEA
 );
+
+-- Tabla usuario
+CREATE TABLE usuario(
+    celular VARCHAR(20) PRIMARY KEY,
+    nombreCompleto VARCHAR(20) NOT NULL,
+    id VARCHAR(20),
+    email VARCHAR(20),
+    gps_latitud DOUBLE PRECISION NOT NULL,
+    gps_longitud DOUBLE PRECISION NOT NULL,
+    tarjeta_numero TEXT NOT NULL, --Encriptado MD5
+    tarjeta_fecha_vencimiento TEXT NOT NULL, --Encriptado MD5
+    tarjeta_cvv TEXT NOT NULL --Encriptado MD5
+);
