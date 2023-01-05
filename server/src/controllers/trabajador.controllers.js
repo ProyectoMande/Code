@@ -2,8 +2,17 @@ const db = require('../database');
 
 const trabajadorCtrl = {};
 
-trabajadorCtrl.getTrabajador = (req, res) => {
-    res.send('trabajador recibido');
+trabajadorCtrl.getTrabajador = async (req, res) => {
+    // Celular del trabajador a obtener
+    const { celular } = req.params;
+
+    // Obtenemos el trabajador
+    const trabajador = await db.query(`
+        SELECT * FROM trabajador WHERE celular = $1
+    `, [celular]);
+
+    // Enviamos el Trabajador
+    res.send(trabajador.rows[0]);
 };
 
 trabajadorCtrl.addTrabajador = async (req, res) => {
