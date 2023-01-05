@@ -1,0 +1,15 @@
+//para testear nuestras respuestas
+###
+GET http://localhost:4000/api/employees
+
+###
+POST http://localhost:4000/api/employees
+
+###
+GET http://localhost:4000/api/employees
+
+###
+PUT http://localhost:4000/api/employees
+
+###
+DELETE  http://localhost:4000/api/employees
