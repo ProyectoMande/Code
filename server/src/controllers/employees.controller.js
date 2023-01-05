@@ -16,7 +16,8 @@ const pool = new Pool(
 empCtrl.getEmployees = async (req,res) => {
     const response = await pool.query('SELECT * FROM employee');
     console.log(response.rows);
-    res.send('getting employees')};
+    //escribe las filas en el html
+    res.status(200).json(response.rows)};
 
 empCtrl.createEmployee = (req,res) => {res.send('creating employees')}
 empCtrl.getEmployee = (req,res) => {res.send('getting employee')} //un empleado
