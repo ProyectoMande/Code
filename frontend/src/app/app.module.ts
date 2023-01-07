@@ -8,6 +8,7 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { RouterModule } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import { EmployeeRegisterComponent } from './components/employee-register/employee-register.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EmployeeRegisterComponent } from './components/employee-register/employ
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
