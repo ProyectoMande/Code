@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Trabajador } from '../../models/employee';
+import { EmployeeService } from '../../services/employee.service'
 
 @Component({
   selector: 'app-employee-register',
@@ -8,6 +8,8 @@ import { Trabajador } from '../../models/employee';
   styleUrls: ['./employee-register.component.scss']
 })
 export class EmployeeRegisterComponent {
+
+  constructor(private employeeService: EmployeeService) {}
 
   nuevoTrabajador: Trabajador = {
     nombreCompleto: '',
@@ -17,7 +19,7 @@ export class EmployeeRegisterComponent {
     direccion: '',
   }
   
-  addTrabajador(form: NgForm) {
-    console.log(form.value);
+  addTrabajador() {
+    this.employeeService.addTrabajador(this.nuevoTrabajador);
   } 
 }
