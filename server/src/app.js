@@ -1,11 +1,15 @@
 //Logica de la Aplicacion
 const express = require('express');
 const morgan = require('morgan');
+const cors = require("cors");
 
 const app = express();
 
 //creamos una "variable" para el puerto y buscamos si existe alguna en las variables de entorno 
 app.set('port',process.env.PORT || 4000);
+
+//
+app.use(cors());
 
 //para usar en el scrip de dev
 app.use(morgan('dev'));

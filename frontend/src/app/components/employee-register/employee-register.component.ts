@@ -20,6 +20,10 @@ export class EmployeeRegisterComponent {
   }
   
   addTrabajador() {
-    this.employeeService.addTrabajador(this.nuevoTrabajador);
+    console.log("add coom");
+    this.employeeService.addTrabajador(this.nuevoTrabajador).subscribe(
+      res => console.log(res), err => console.log(err)
+    );
+    return false
   } 
 }
