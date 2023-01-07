@@ -1,5 +1,7 @@
 const db = require('../database');
 
+const getCoordenadas = require('./controllers');
+
 const trabajadorCtrl = {};
 
 trabajadorCtrl.getTrabajador = async (req, res) => {
@@ -23,11 +25,16 @@ trabajadorCtrl.addTrabajador = async (req, res) => {
         id,
         email,
         estado,
-        gps_latitud,
-        gps_longitud,
+        direccion,
         foto_perfil,
         img_id
     } = req.body;
+
+    const coordenadas = await getCoordenadas(direccion);
+    // coordenadas
+    const gps_latitud = coordenadas.y;
+    const gps_longitud = coordenadas.x;
+
     // Insertamos el trabajador a la bd
     const newTrabajador = await db.query(`INSERT INTO trabajador 
         (celular, nombreCompleto, id, email, estado, gps_latitud, gps_longitud,
