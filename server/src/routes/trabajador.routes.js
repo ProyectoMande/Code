@@ -1,6 +1,8 @@
 // Rutas que permitiran definir las 
 // operaciones del servidor
 
+const multerTrabajador = require('../libs/multer');
+
 // Se importa express
 const express = require('express');
 
@@ -19,7 +21,7 @@ router.get('/', (req, res) => {
 });
 
 // Agregar ta¿rabajdor
-router.post('/', trabajadorCtrl.addTrabajador);
+router.post('/', multerTrabajador,trabajadorCtrl.addTrabajador);
 
 // Ver trabajadores
 router.get('/', trabajadorCtrl.getTrabajador);

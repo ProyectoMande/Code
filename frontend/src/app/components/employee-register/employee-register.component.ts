@@ -14,6 +14,7 @@ interface HtmlInputEvent extends Event {
 export class EmployeeRegisterComponent {
 
   fotoPerfil: File;
+  fotoId: File;
 
   constructor(private employeeService: EmployeeService) {}
 
@@ -31,15 +32,18 @@ export class EmployeeRegisterComponent {
   onFotoPerfilSelected(event: any):void {
     if (event.target.files && event.target.files[0]) {
       this.fotoPerfil = <File>event.target.files[0];
-      // image preview
-      const reader = new FileReader();
-      reader.readAsDataURL(this.fotoPerfil);
+    }
+  }
+
+  onFotoIdSelected(event: any):void {
+    if (event.target.files && event.target.files[0]) {
+      this.fotoId = <File>event.target.files[0];
     }
   }
 
   addTrabajador() {
     console.log("add coom");
-    this.employeeService.addTrabajador(this.nuevoTrabajador, this.fotoPerfil).subscribe(
+    this.employeeService.addTrabajador(this.nuevoTrabajador, this.fotoPerfil, this.fotoId).subscribe(
       res => console.log(res), err => console.log(err)
     );
     return false

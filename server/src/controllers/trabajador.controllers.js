@@ -18,7 +18,7 @@ trabajadorCtrl.getTrabajador = async (req, res) => {
 };
 
 trabajadorCtrl.addTrabajador = async (req, res) => {
-    console.log(req.body);
+    console.log(req.files);
     /*
     // Obtenemos los datos del trabajdor
     const {

@@ -44,7 +44,7 @@
               <!--Foto Documento de Identidad-->
               <div class="form-group">
                 <label for="idFile" class="form-label mt-4">Foto Documento de Indentidad</label>
-                <input class="form-control" type="file" name="fotoId" [(ngModel)]="nuevoTrabajador.fotoId">
+                <input class="form-control" type="file" name="fotoId" (change)="onFotoIdSelected($event)">
               </div>
 
               <!--Foto de perfil-->
