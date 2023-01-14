@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Usuario } from '../../models/usuario'
+import { UsuarioService } from '../../services/usuario.service'
 
 @Component({
   selector: 'app-user-register',
@@ -8,7 +9,9 @@ import { Usuario } from '../../models/usuario'
 })
 export class UserRegisterComponent {
 
-  constructor(){}
+  constructor(private usuarioService: UsuarioService){}
+
+  reciboImage: File;
 
   usuarioNuevo: Usuario = {
     celular: '',
@@ -21,7 +24,16 @@ export class UserRegisterComponent {
     tarjeta_cvv: ''
   };
 
+  onImageReciboSelected(event: any):void {
+    if (event.target.files && event.target.files[0]) {
+      this.reciboImage = <File>event.target.files[0];
+    }
+  }
+
   addUsuario(){
-    console.log(this.usuarioNuevo);
+    this.usuarioService.addUsuario(this.usuarioNuevo, this.reciboImage)
+      .subscribe(
+        res => console.log(res), err => console.log(err)
+      );
   }
 }

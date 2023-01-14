@@ -43,7 +43,7 @@
                   <!--Foto Recibo-->
                   <div class="form-group">
                     <label for="reciboImage" class="form-label mt-4">Foto Recibo</label>
-                    <input class="form-control" type="file">
+                    <input class="form-control" type="file" (change)="onImageReciboSelected($event)">
                   </div>
 
                   <!--Tarjeta numero-->
