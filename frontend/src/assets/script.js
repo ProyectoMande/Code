@@ -5,19 +5,12 @@ function employeeRegister(){
     $("#alertSi").hide();
     $("#alertNo").hide();
  }
-  
- function cerrarAlertaNo(){
-    $('#alertNo').hide();
- }
 
- function cerrarAlertaSi(){
-    $('#alertSi').hide();
+ function cerrarAlerta(nombreAlerta){
+   nombreAlerta = '#' + nombreAlerta
+   $(nombreAlerta).hide()
  }
   
- function datosIncompletos(){   
-    $('#alertNoDetails').html('Has introducido datos equivocados');
-    $('#alertNo').show();
- }
 
  function comprobarDatos(){
     //var empt = document.forms["form"]["nombreCompleto"].value; <- Otra manera de obtener los valores
