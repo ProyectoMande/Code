@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Usuario } from '../../models/usuario'
 
 @Component({
   selector: 'app-user-register',
@@ -7,4 +8,20 @@ import { Component } from '@angular/core';
 })
 export class UserRegisterComponent {
 
+  constructor(){}
+
+  usuarioNuevo: Usuario = {
+    celular: '',
+    nombreCompleto: '',
+    id: '',
+    email: '',
+    direccion: '',
+    tarjeta_numero: '',
+    tarjeta_fecha_vencimiento: '',
+    tarjeta_cvv: ''
+  };
+
+  addUsuario(){
+    console.log(this.usuarioNuevo);
+  }
 }
