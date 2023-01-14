@@ -5,14 +5,14 @@
         <!--One of three columns-->
       </div>
       <div class="col-sm">
-        <form #trabajadorForm="ngForm" (ngSubmit)="addTrabajador()">
+        <form id = "form" name="form" #trabajadorForm="ngForm" (ngSubmit)="addTrabajador()">
             <fieldset>
               <legend> Registro Trabajador </legend>
 
               <!--Nombre completo-->
               <div class="form-group">
                 <label for="inputNombreCompleto" class="form-label mt-4">Nombre Completo</label>
-                <input type="text" class="form-control" name="nombreCompleto" placeholder="Nombre Completo" [(ngModel)]="nuevoTrabajador.nombreCompleto">
+                <input id = "nombreCompleto" type="text" class="form-control" name="nombreCompleto" placeholder="Nombre Completo" [(ngModel)]="nuevoTrabajador.nombreCompleto">
               </div>
 
               <!--Número de celular-->
@@ -74,8 +74,24 @@
                 </div>
               </div>
               
+              <!--Alerta Si-->
+              <div id = "alertSi" class="alert alert-dismissible alert-success" role="alert">
+                <button id="cerrarAlertSi" type="button" class="btn-close" onClick = "cerrarAlertaSi()"></button>
+                <strong>¡El registro fue realizado exitosamente</strong> Ya puedes ingresar a tu cuenta.
+                <div id="alertSiDetails"></div>
+              </div>
+
+              <!--Alerta No-->
+              <div id = "alertNo" class="alert alert-dismissible alert-danger" role="alert">
+                <button id="cerrarAlertNo" type="button" class="btn-close" onClick = "cerrarAlertaNo()"></button>
+                <strong>¡Ops!</strong> Los datos se encuentran incompletos. Por favor revisa de nuevo
+                <div id="alertNoDetails"></div>
+              </div>
+
               <!--Botón Enviar-->
-              <button type="submit" class="btn btn-primary" onClick = "alertPrueba()">Enviar</button>
+              <button type="submit" class="btn btn-primary" onClick = "comprobarDatos()">Enviar</button>
+
+
             </fieldset>
           </form>
       </div>
