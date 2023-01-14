@@ -16,6 +16,26 @@ export class EmployeeRegisterComponent {
   fotoPerfil: File;
   fotoId: File;
 
+  labores = [
+    {
+      "nombre": "aseador",
+      "checked": false,
+      "precio_hora": 0
+    },
+    {
+      "nombre": "plomero",
+      "checked": false,
+      "precio_hora": 0
+    },
+    {
+      "nombre": "cerrajero",
+      "checked": false,
+      "precio_hora": 0
+    }
+  ];
+
+  laboresTrabajador: Map<string, number>;
+
   constructor(private employeeService: EmployeeService) {}
 
   nuevoTrabajador: Trabajador = {
@@ -48,4 +68,8 @@ export class EmployeeRegisterComponent {
     );
     return false
   } 
+
+  addLabor(event: any):void {
+    console.log(this.labores);
+  }
 }

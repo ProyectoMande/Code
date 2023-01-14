@@ -57,30 +57,20 @@
               <div class="form-group">
                 <label for="fotoPerfilFile" class="form-label mt-4">Seleccione las labores que desempeña:</label>
                 <div class="form-group">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Plomero</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox2">Cerrajero</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                    <label class="form-check-label" for="inlineCheckbox3">Jardinero</label>
-                  </div>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
-                  <label class="form-check-label" for="inlineCheckbox4">Aseador</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
-                  <label class="form-check-label" for="inlineCheckbox5">Profesor de Inglés</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6">
-                  <label class="form-check-label" for="inlineCheckbox6">Paseador de Perros</label>
+                  <!--Checkbox de las labores-->
+                  <span *ngFor="let labor of labores">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" value='{{ labor.nombre }}' name="checked" [(ngModel)]="labor.checked" (change)="addLabor($event)">
+                      <label class="form-check-label" for="inlineCheckbox1">{{ labor.nombre }}</label>
+                    </div>
+                  </span>
+                  <!--Precio de las labores-->
+                  <span *ngFor="let labor of labores">
+                    <div class="form-group" *ngIf="(labor.checked)">
+                      <label class="form-label mt-4">{{ labor.nombre }}</label>
+                      <input type="text" class="form-control" name="precio_hora" placeholder="$$$" [(ngModel)]="labor.precio_hora">
+                    </div>
+                  </span>
                 </div>
               </div>
               
