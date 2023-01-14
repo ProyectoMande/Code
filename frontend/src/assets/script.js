@@ -31,6 +31,37 @@ function employeeRegister(){
     } else {
         $('#alertNoDetails').html('');
         $('#alertNo').show();
+        
+        if (!nombreCompleto){
+            document.getElementById('form').nombreCompleto.classList.add('error');
+        }
+
+        if (!celular){
+            document.getElementById('form').celular.classList.add('error');
+        }
+
+        if (!id){
+            document.getElementById('form').id.classList.add('error');
+        }
+
+        if (!email){
+            document.getElementById('form').email.classList.add('error');
+        }
+
+        if (!direccion){
+            document.getElementById('form').direccion.classList.add('error');
+        }
+
+        if (!fotoId){
+            document.getElementById('form').fotoId.classList.add('error');
+        }
+
+        if (!fotoPerfil){
+            document.getElementById('form').fotoPerfil.classList.add('error');
+        }
+
+        window.scrollTo(0, document.body.scrollHeight);
+
     }
  }
 
