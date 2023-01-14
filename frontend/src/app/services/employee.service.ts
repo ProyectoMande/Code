@@ -14,17 +14,13 @@ export class EmployeeService {
   addTrabajador(trabajador: Trabajador, fotoPerfil: File, fotoId: File) {
     console.log(trabajador);
     const fd = new FormData();
-    /*
-    nombreCompleto: string,
-    celular: string,
-    id: string,
-    email: string,
-    direccion: string,
-    fotoId?: File,
-    fotoPerfil?: File
-    */
     fd.append('nombreCompleto', trabajador.nombreCompleto);
     fd.append('celular', trabajador.celular);
+    fd.append('id', trabajador.id);
+    fd.append('email', trabajador.email);
+    fd.append('estado', 'disponible');
+    fd.append('direccion', trabajador.direccion);
+
     fd.append('fotoPerfil', fotoPerfil);
     fd.append('fotoId', fotoId);
     return this.http.post(this.URI, fd);
