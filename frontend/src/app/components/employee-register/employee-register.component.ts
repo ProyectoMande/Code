@@ -6,11 +6,20 @@ interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
 }
 
+//Region methods which is defined in the JS file.
+declare function employeeRegister(): any;
+declare function datosIncompletos(): any;
+declare function cerrarAlertaNo(): any;
+declare function cerrarAlertaSi(): any;
+//End Region
+
+
 @Component({
   selector: 'app-employee-register',
   templateUrl: './employee-register.component.html',
   styleUrls: ['./employee-register.component.scss']
 })
+
 export class EmployeeRegisterComponent {
 
   fotoPerfil: File;
@@ -50,6 +59,7 @@ export class EmployeeRegisterComponent {
   }
 
   ngOnInit() {
+    employeeRegister();
   }
 
   onFotoPerfilSelected(event: any):void {
