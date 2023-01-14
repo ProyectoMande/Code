@@ -1,4 +1,5 @@
 const db = require('../database');
+const path = require('path');
 
 const getCoordenadas = require('./controllers');
 
@@ -18,18 +19,16 @@ trabajadorCtrl.getTrabajador = async (req, res) => {
 };
 
 trabajadorCtrl.addTrabajador = async (req, res) => {
-    console.log(req.files);
-    /*
     // Obtenemos los datos del trabajdor
+    const foto_perfil = req.files.fotoPerfil[0].filename;
+    const img_id = req.files.fotoId[0].filename;
     const {
         celular,
         nombreCompleto,
         id,
         email,
         estado,
-        direccion,
-        foto_perfil,
-        img_id
+        direccion
     } = req.body;
 
     
@@ -45,7 +44,7 @@ trabajadorCtrl.addTrabajador = async (req, res) => {
                 celular, nombreCompleto, id, email, estado, gps_latitud, gps_longitud, foto_perfil, img_id
             ]);
     
-    console.log('Nuevo Trabajador = ', newTrabajador.rows[0]);*/
+    console.log('Nuevo Trabajador = ', newTrabajador.rows[0]);
 };
 
 trabajadorCtrl.updateTrabajador = (req, res) => {
