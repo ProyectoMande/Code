@@ -1,4 +1,5 @@
 const db = require('../database');
+const getCoordenadas = require('./controllers');
 
 const usuarioCtrl = {};
 
@@ -9,12 +10,16 @@ usuarioCtrl.addUsuario = async (req, res) => {
         nombreCompleto,
         id,
         email,
-        gps_latitud,
-        gps_longitud,
+        direccion,
         tarjeta_numero,
         tarjeta_fecha_vencimiento,
         tarjeta_cvv
      } = req.body;
+
+    const coordenadas = await getCoordenadas(direccion);
+    // coordenadas
+    const gps_latitud = coordenadas.y;
+    const gps_longitud = coordenadas.x;
     
     // Agregamos el usuario a la db
     const newUsuario = await db.query(`INSERT INTO usuario 

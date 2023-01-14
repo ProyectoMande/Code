@@ -20,7 +20,6 @@ const getCoordenadas = async (direccion) => {
     // Direccion coincidente
     const dir = candidates[0];
     
-    console.log(dir);
     return dir.location;
 };
 
