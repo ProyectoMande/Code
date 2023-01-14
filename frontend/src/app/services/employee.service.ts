@@ -11,7 +11,7 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
-  addTrabajador(trabajador: Trabajador, fotoPerfil: File, fotoId: File) {
+  addTrabajador(trabajador: Trabajador, fotoPerfil: File, fotoId: File, laboresTrabajador: any[]) {
     console.log(trabajador);
     const fd = new FormData();
     fd.append('nombreCompleto', trabajador.nombreCompleto);
@@ -23,6 +23,9 @@ export class EmployeeService {
 
     fd.append('fotoPerfil', fotoPerfil);
     fd.append('fotoId', fotoId);
+
+    fd.append('laboresTrabajador', JSON.stringify(laboresTrabajador));
+
     return this.http.post(this.URI, fd);
   }
 }

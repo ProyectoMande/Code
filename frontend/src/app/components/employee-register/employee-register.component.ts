@@ -18,23 +18,26 @@ export class EmployeeRegisterComponent {
 
   labores = [
     {
+      "id": 1,
       "nombre": "aseador",
       "checked": false,
       "precio_hora": 0
     },
     {
+      "id": 2,
       "nombre": "plomero",
       "checked": false,
       "precio_hora": 0
     },
     {
+      "id": 3,
       "nombre": "cerrajero",
       "checked": false,
       "precio_hora": 0
     }
   ];
 
-  laboresTrabajador: Map<string, number>;
+  laboresTrabajador: any[] = [];
 
   constructor(private employeeService: EmployeeService) {}
 
@@ -62,8 +65,17 @@ export class EmployeeRegisterComponent {
   }
 
   addTrabajador() {
-    console.log("add coom");
-    this.employeeService.addTrabajador(this.nuevoTrabajador, this.fotoPerfil, this.fotoId).subscribe(
+
+    // Añadimos las labores
+    this.laboresTrabajador = [];
+    for (var labor of this.labores) {
+      if (labor.checked){
+        this.laboresTrabajador.push(labor);
+      }
+    }
+
+    // Utilizamos el servicio employeeRegister para enviar los datos
+    this.employeeService.addTrabajador(this.nuevoTrabajador, this.fotoPerfil, this.fotoId, this.laboresTrabajador).subscribe(
       res => console.log(res), err => console.log(err)
     );
     return false

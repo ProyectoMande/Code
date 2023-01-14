@@ -19,6 +19,9 @@ trabajadorCtrl.getTrabajador = async (req, res) => {
 };
 
 trabajadorCtrl.addTrabajador = async (req, res) => {
+    const labores = JSON.parse(req.body.laboresTrabajador);
+    console.log(labores);
+    /*
     // Obtenemos los datos del trabajdor
     const foto_perfil = req.files.fotoPerfil[0].filename;
     const img_id = req.files.fotoId[0].filename;
@@ -30,7 +33,6 @@ trabajadorCtrl.addTrabajador = async (req, res) => {
         estado,
         direccion
     } = req.body;
-
     
     const coordenadas = await getCoordenadas(direccion);
     // coordenadas
@@ -44,7 +46,7 @@ trabajadorCtrl.addTrabajador = async (req, res) => {
                 celular, nombreCompleto, id, email, estado, gps_latitud, gps_longitud, foto_perfil, img_id
             ]);
     
-    console.log('Nuevo Trabajador = ', newTrabajador.rows[0]);
+    console.log('Nuevo Trabajador = ', newTrabajador.rows[0]);*/
 };
 
 trabajadorCtrl.updateTrabajador = (req, res) => {
