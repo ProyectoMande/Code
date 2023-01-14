@@ -79,3 +79,9 @@ CREATE TABLE calificacion(
     CONSTRAINT fk_solicitud_calificacion
         FOREIGN KEY (id_solicitud) REFERENCES solicitud(id)
 );
+
+-- LABORES PREDIFINIDAS --
+INSERT INTO labor (nombre) VALUES 
+    ('aseador'),
+    ('plomero'),
+    ('cerrajero');
