@@ -22,6 +22,9 @@ app.use("/api/trabajador",require('./routes/trabajador.routes'));
 
 // Rutas de usuario
 app.use('/api/usuario', require('./routes/usuario.routes'));
+
+// Rutas de labor
+app.use('/api/labor', require('./routes/labor.routes'));
  
 
 //exportamos el archivo
