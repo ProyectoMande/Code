@@ -1,54 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { Trabajador } from '../../models/employee';
+import { Labor } from '../../models/labor'
 import { EmployeeService } from '../../services/employee.service'
+import { LaborService } from '../../services/labor.service'
 
 interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
 }
-
-//Region methods which is defined in the JS file.
-declare function employeeRegister(): any;
-declare function datosIncompletos(): any;
-declare function cerrarAlertaNo(): any;
-declare function cerrarAlertaSi(): any;
-//End Region
-
 
 @Component({
   selector: 'app-employee-register',
   templateUrl: './employee-register.component.html',
   styleUrls: ['./employee-register.component.scss']
 })
-
 export class EmployeeRegisterComponent {
 
   fotoPerfil: File;
   fotoId: File;
 
-  labores = [
-    {
-      "id": 1,
-      "nombre": "aseador",
-      "checked": false,
-      "precio_hora": 0
-    },
-    {
-      "id": 2,
-      "nombre": "plomero",
-      "checked": false,
-      "precio_hora": 0
-    },
-    {
-      "id": 3,
-      "nombre": "cerrajero",
-      "checked": false,
-      "precio_hora": 0
-    }
-  ];
+  labores: Labor[];
 
   laboresTrabajador: any[] = [];
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(
+    private employeeService: EmployeeService,
+    private laborService: LaborService
+    ) {}
 
   nuevoTrabajador: Trabajador = {
     nombreCompleto: '',
@@ -57,9 +34,15 @@ export class EmployeeRegisterComponent {
     email: '',
     direccion: '',
   }
-
+  
   ngOnInit() {
-    employeeRegister();
+    this.laborService.getLabores().subscribe(
+      res => {
+        const labs = <Labor[]>res;
+        this.labores = labs;
+      }, 
+      err => console.log(err)
+    )
   }
 
   onFotoPerfilSelected(event: any):void {
