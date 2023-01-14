@@ -20,8 +20,8 @@ CREATE TABLE trabajador(
     estado VARCHAR(20),
     gps_latitud DOUBLE PRECISION NOT NULL,
     gps_longitud DOUBLE PRECISION NOT NULL,
-    foto_perfil BYTEA,
-    img_id BYTEA
+    foto_perfil VARCHAR(100),
+    img_id VARCHAR(100)
 );
 
 -- Tabla usuario
