@@ -10,6 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { EmployeeRegisterComponent } from './components/employee-register/employee-register.component';
 import { FormsModule } from '@angular/forms';
 import { EmployeeLoginComponent } from './components/employee-login/employee-login.component';
+import { TrabajadorHomeComponent } from './components/trabajador-home/trabajador-home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EmployeeLoginComponent } from './components/employee-login/employee-log
     HomeComponent,
     UserRegisterComponent,
     EmployeeRegisterComponent,
-    EmployeeLoginComponent
+    EmployeeLoginComponent,
+    TrabajadorHomeComponent
   ],
   imports: [
     BrowserModule,

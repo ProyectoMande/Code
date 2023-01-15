@@ -28,4 +28,8 @@ export class EmployeeService {
 
     return this.http.post(this.URI, fd);
   }
+
+  getTrabajador(celular: string) {
+    return this.http.get(`${this.URI}/${celular}`);
+  }
 }
