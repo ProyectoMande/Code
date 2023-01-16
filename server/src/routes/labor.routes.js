@@ -9,4 +9,7 @@ const laborCtrl = require('../controllers/labor.controllers');
 // Obteneer las labores
 router.get('/', laborCtrl.getLabores);
 
+// Obtener labores disponibles(con trabajadores disponibles)
+router.get('/disponibles', laborCtrl.getLaboresDisponibles);
+
 module.exports = router;
