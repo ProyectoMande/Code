@@ -8,8 +8,8 @@
             <div class="card-body">
                 <table class="table table-hover">
                     <tbody>
-                        <tr class="table-primary">
-                            <td>Labor</td>
+                        <tr class="table-primary" *ngFor="let labor of laboresDisponibles">
+                            <td>{{ labor.n_labor }}</td>
                         </tr>
                     </tbody>
                 </table>

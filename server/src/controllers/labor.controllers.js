@@ -15,7 +15,7 @@ laborCtrl.getLaboresDisponibles = async (req, res) => {
         `SELECT * FROM labores_disponibles`
     );
 
-    res.send(labores_disponibles);
+    res.send(labores_disponibles.rows);
 }
 
 module.exports = laborCtrl;

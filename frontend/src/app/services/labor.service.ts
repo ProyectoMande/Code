@@ -13,4 +13,8 @@ export class LaborService {
   getLabores() {
     return this.http.get(this.URI);
   }
+
+  getLaboresDisponibles() {
+    return this.http.get(`${this.URI}/disponibles`);
+  }
 }
