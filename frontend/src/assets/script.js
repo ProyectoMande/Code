@@ -12,53 +12,32 @@ function employeeRegister(){
  }
   
 
- function comprobarDatos(){
+ function comprobarDatos(elementos){
+    //Maneras de obtener los valores
     //var empt = document.forms["form"]["nombreCompleto"].value; <- Otra manera de obtener los valores
+    //var nombreCompleto = document.getElementById('form').nombreCompleto.value;
 
-    //Obtenemos cada valor guardado en los campos de texto y los guardamos en una variable
-    var nombreCompleto = document.getElementById('form').nombreCompleto.value;
-    var celular = document.getElementById('form').celular.value;
-    var id = document.getElementById('form').id.value;
-    var email = document.getElementById('form').email.value;
-    var direccion = document.getElementById('form').direccion.value;
-    var fotoId = document.getElementById('form').fotoId.value;
-    var fotoPerfil = document.getElementById('form').fotoPerfil.value;
+    //Obtenemos cada valor guardado en los campos de texto y los guardamos en un array
+    var elementosValores = []
+    for (var i = 0; i < elementos.length; i++){
+        elementosValores.push(elementos[i].value);
+    }
 
-    
-    if (nombreCompleto && celular && id && email && direccion && fotoId && fotoPerfil){
+    //Si cada elemento de elementosValores contiene texto, se mostrará la ventana afirmativa
+    //De lo contrario, se mostrará la ventana negativa
+    if (elementosValores.every(elemento => elemento)){
         $('#alertSiDetails').html('');
         $('#alertSi').show();
     } else {
         $('#alertNoDetails').html('');
         $('#alertNo').show();
-        
-        if (!nombreCompleto){
-            document.getElementById('form').nombreCompleto.classList.add('error');
-        }
 
-        if (!celular){
-            document.getElementById('form').celular.classList.add('error');
-        }
-
-        if (!id){
-            document.getElementById('form').id.classList.add('error');
-        }
-
-        if (!email){
-            document.getElementById('form').email.classList.add('error');
-        }
-
-        if (!direccion){
-            document.getElementById('form').direccion.classList.add('error');
-        }
-
-        if (!fotoId){
-            document.getElementById('form').fotoId.classList.add('error');
-        }
-
-        if (!fotoPerfil){
-            document.getElementById('form').fotoPerfil.classList.add('error');
-        }
+        //Por cada elemento en elementos, si este no contiene texto, se le añaderá el borde rojo.
+        elementos.forEach((elemento) => {
+            if (!elemento.value){
+                elemento.classList.add('borderError');
+            }
+        })
 
         window.scrollTo(0, document.body.scrollHeight);
 
