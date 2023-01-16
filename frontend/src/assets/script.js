@@ -20,7 +20,6 @@ function comprobarDatos(elementos){
     var elementosValores = []
     for (var i = 0; i < elementos.length; i++){
         elementosValores.push(elementos[i].value);
-        alert(elementos[i].value)
     }
 
     //Si cada elemento de elementosValores contiene texto, se mostrará la ventana afirmativa
