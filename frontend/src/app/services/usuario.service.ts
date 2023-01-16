@@ -26,4 +26,8 @@ export class UsuarioService {
 
     return this.http.post(this.URI, fd);
   }
+
+  getUsuario(celular: string){
+    return this.http.get(`${this.URI}/${celular}`);
+  }
 }

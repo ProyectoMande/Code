@@ -1,0 +1,24 @@
+<app-navbar-inicio></app-navbar-inicio>
+<div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <!--One of three columns-->
+      </div>
+      <div class="col">
+        <form #trabajadorForm="ngForm" (ngSubmit)="loginUsuario()">
+            <fieldset>
+                <legend>Login Usuario</legend>
+                  <!--Número de celular-->
+                  <div class="form-group">
+                    <label class="form-label mt-4">Numero de Celular</label>
+                    <input type="text" class="form-control" name="celular" placeholder="Celular" [(ngModel)]="celular">
+                  </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </fieldset>
+            </form>
+      </div>
+      <div class="col-sm">
+        <!--One of three columns-->
+      </div>
+    </div>
+</div>
