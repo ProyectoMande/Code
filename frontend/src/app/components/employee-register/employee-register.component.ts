@@ -8,6 +8,10 @@ interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
 }
 
+//Region methods which is defined in the JS file.
+declare function employeeRegister(): any;
+//End Region
+
 @Component({
   selector: 'app-employee-register',
   templateUrl: './employee-register.component.html',
@@ -36,6 +40,7 @@ export class EmployeeRegisterComponent {
   }
   
   ngOnInit() {
+    employeeRegister();
     this.laborService.getLabores().subscribe(
       res => {
         const labs = <Labor[]>res;
