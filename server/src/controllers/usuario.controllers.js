@@ -35,4 +35,17 @@ usuarioCtrl.addUsuario = async (req, res) => {
     console.log(newUsuario.rows[0]);
 };
 
+usuarioCtrl.getUsuario = async (req, res) => {
+    // Celular del usuario a obtener
+    const { celular } = req.params;
+
+    // Obtenemos el usuario
+    const usuario = await db.query(`
+        SELECT * FROM usuario WHERE celular = $1
+    `, [celular]);
+
+    // Enviamos el Trabajador
+    res.send(usuario.rows[0]);
+}
+
 module.exports = usuarioCtrl;

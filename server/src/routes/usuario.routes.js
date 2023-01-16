@@ -14,4 +14,7 @@ const usuarioCtrl = require('../controllers/usuario.controllers');
 // Agregar usuario
 router.post('/', multerUsuario, usuarioCtrl.addUsuario);
 
+// Obtener usuario
+router.get('/:celular', usuarioCtrl.getUsuario);
+
 module.exports = router;
