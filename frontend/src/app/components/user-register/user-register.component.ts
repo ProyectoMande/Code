@@ -2,11 +2,16 @@ import { Component } from '@angular/core';
 import { Usuario } from '../../models/usuario'
 import { UsuarioService } from '../../services/usuario.service'
 
+//Region methods which is defined in the JS file.
+declare function userRegister(): any;
+//End Region
+
 @Component({
   selector: 'app-user-register',
   templateUrl: './user-register.component.html',
   styleUrls: ['./user-register.component.scss']
 })
+
 export class UserRegisterComponent {
 
   constructor(private usuarioService: UsuarioService){}
@@ -35,5 +40,9 @@ export class UserRegisterComponent {
       .subscribe(
         res => console.log(res), err => console.log(err)
       );
+  }
+
+  ngOnInit() {
+    userRegister();
   }
 }

@@ -1,18 +1,17 @@
 //-------------------------------------------------------------------------
-//----------------------------EMPLOYEE REGISTER----------------------------
+//--------------------------FUNCIONES GENERALES----------------------------
 //-------------------------------------------------------------------------
-function employeeRegister(){
-    $("#alertSi").hide();
-    $("#alertNo").hide();
+
+function normalBorder(elemento){
+    elemento.classList.add('borderNormal');
  }
 
- function cerrarAlerta(nombreAlerta){
-   nombreAlerta = '#' + nombreAlerta
-   $(nombreAlerta).hide()
- }
-  
+function cerrarAlerta(nombreAlerta){
+    nombreAlerta = '#' + nombreAlerta
+    $(nombreAlerta).hide()
+  }
 
- function comprobarDatos(elementos){
+function comprobarDatos(elementos){
     //Maneras de obtener los valores
     //var empt = document.forms["form"]["nombreCompleto"].value; <- Otra manera de obtener los valores
     //var nombreCompleto = document.getElementById('form').nombreCompleto.value;
@@ -21,6 +20,7 @@ function employeeRegister(){
     var elementosValores = []
     for (var i = 0; i < elementos.length; i++){
         elementosValores.push(elementos[i].value);
+        alert(elementos[i].value)
     }
 
     //Si cada elemento de elementosValores contiene texto, se mostrará la ventana afirmativa
@@ -44,15 +44,22 @@ function employeeRegister(){
     }
  }
 
- function normalBorder(elemento){
-    elemento.classList.add('borderNormal');
+//-------------------------------------------------------------------------
+//----------------------------EMPLOYEE REGISTER----------------------------
+//-------------------------------------------------------------------------
+function employeeRegister(){
+    $("#alertSi").hide();
+    $("#alertNo").hide();
  }
 
-//-------------------------------------------------------------------------
-//----------------------------EMPLOYEE-------------------------------------
-//-------------------------------------------------------------------------
 
-
+//-------------------------------------------------------------------------
+//----------------------------USER REGISTER-------------------------------
+//-------------------------------------------------------------------------
+function userRegister(){
+    $("#alertSi").hide();
+    $("#alertNo").hide();
+}
 
 //-------------------------------------------------------------------------
 //----------------------------EMPLOYEE LOGIN-------------------------------
@@ -64,8 +71,5 @@ function employeeRegister(){
 //-------------------------------------------------------------------------
 
 
-//-------------------------------------------------------------------------
-//----------------------------USER REGISTER-------------------------------
-//-------------------------------------------------------------------------
 
  
