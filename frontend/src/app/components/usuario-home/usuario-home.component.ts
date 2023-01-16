@@ -12,6 +12,8 @@ export class UsuarioHomeComponent {
   constructor(private laborService: LaborService){}
 
   laboresDisponibles: any[];
+  
+  trabajadoresDisponibles: any[]; // Segun labor
 
   ngOnInit() {
     this.laborService.getLaboresDisponibles().subscribe(
