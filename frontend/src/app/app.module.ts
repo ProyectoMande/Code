@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { EmployeeLoginComponent } from './components/employee-login/employee-login.component';
 import { TrabajadorHomeComponent } from './components/trabajador-home/trabajador-home.component';
 import { NavbarInicioComponent } from './components/navbar-inicio/navbar-inicio.component';
+import { NavbarTrabajadorHomeComponent } from './components/navbar-trabajador-home/navbar-trabajador-home.component';
+import { NotificacionesTrabajadorComponent } from './components/notificaciones-trabajador/notificaciones-trabajador.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NavbarInicioComponent } from './components/navbar-inicio/navbar-inicio.
     EmployeeRegisterComponent,
     EmployeeLoginComponent,
     TrabajadorHomeComponent,
-    NavbarInicioComponent
+    NavbarInicioComponent,
+    NavbarTrabajadorHomeComponent,
+    NotificacionesTrabajadorComponent
   ],
   imports: [
     BrowserModule,
