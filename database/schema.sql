@@ -92,3 +92,35 @@ SELECT id_labor, n_labor FROM (SELECT nombre AS n_labor, id AS id_labor FROM lab
         INNER JOIN trabajador_labor
             ON labor.id = trabajador_labor.id_labor) AS Labores
                 INNER JOIN trabajador ON trabajador.estado = 'disponible';
+
+
+-- fUNCION QUE RETORNA LA INFO DE LOS TRABAJDORES (disponibles) DE UNA LABOR
+CREATE OR REPLACE FUNCTION trabajadores_labor(labor_id INTEGER)
+RETURNS SETOF "record" AS
+$$
+DECLARE r record;
+BEGIN
+    FOR r IN SELECT celular_trabajador, avg, gps_latitud, gps_longitud, precio_hora FROM
+    (SELECT celular_trabajador, avg, gps_latitud, gps_longitud FROM
+        (SELECT celular_trabajador, AVG(calificacion) AS promedio_calificaion FROM solicitud
+            INNER JOIN calificacion
+                ON solicitud.id = calificacion.id_solicitud
+                    GROUP BY celular_trabajador) AS calificacion
+                        INNER JOIN trabajador
+                            ON trabajador.celular = calificacion.celular_trabajador
+                                AND trabajador.estado = 'disponible')
+                                AS info_trabajador
+                                    NATURAL JOIN 
+                                        (SELECT precio_hora FROM trabajador_labor
+                                            WHERE id_labor = labor_id) AS precios_hora
+        LOOP
+            RETURN NEXT r;
+        END LOOP;
+    RETURN;
+END;
+$$
+LANGUAGE plpgsql;
+-- Esta funcion se puede extraer en varias vistas o funciones para mejorar su lectura
+-- Para llamar se hace asi:
+--  select * from trabajadores_labor(1) AS
+--      (celular_trabajador VARCHAR, avg DOUBLE PRECISION, gps_latitud DOUBLE PRECISION, gps_longitud DOUBLE PRECISION, precio_hora INTEGER);
