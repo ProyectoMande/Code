@@ -100,8 +100,8 @@ RETURNS SETOF "record" AS
 $$
 DECLARE r record;
 BEGIN
-    FOR r IN SELECT celular_trabajador, avg, gps_latitud, gps_longitud, precio_hora FROM
-    (SELECT celular_trabajador, avg, gps_latitud, gps_longitud FROM
+    FOR r IN SELECT celular_trabajador, promedio_calificaion, gps_latitud, gps_longitud, precio_hora FROM
+    (SELECT celular_trabajador, promedio_calificaion, gps_latitud, gps_longitud FROM
         (SELECT celular_trabajador, AVG(calificacion) AS promedio_calificaion FROM solicitud
             INNER JOIN calificacion
                 ON solicitud.id = calificacion.id_solicitud
@@ -113,6 +113,7 @@ BEGIN
                                     NATURAL JOIN 
                                         (SELECT precio_hora FROM trabajador_labor
                                             WHERE id_labor = labor_id) AS precios_hora
+                                                ORDER BY precio_hora, promedio_calificaion
         LOOP
             RETURN NEXT r;
         END LOOP;
@@ -121,6 +122,21 @@ END;
 $$
 LANGUAGE plpgsql;
 -- Esta funcion se puede extraer en varias vistas o funciones para mejorar su lectura
+-- FALTA LA DISTANCIA
 -- Para llamar se hace asi:
 --  select * from trabajadores_labor(1) AS
 --      (celular_trabajador VARCHAR, avg DOUBLE PRECISION, gps_latitud DOUBLE PRECISION, gps_longitud DOUBLE PRECISION, precio_hora INTEGER);
+
+
+-- Funcion que retornar las distancia entre dos coordenadas
+-- ES NECESARIO POSTGIS
+CREATE OR REPLACE FUNCTION distancia_coordenadas
+    (lon_t DOUBLE PRECISION, lat_t DOUBLE PRECISION, 
+    lon_u DOUBLE PRECISION, lat_u DOUBLE PRECISION) 
+RETURNS DOUBLE PRECISION AS
+$$
+BEGIN
+    RETURN ST_DistanceSphere(ST_MakePoint(lon_t, lat_t),ST_MakePoint(lon_u, lat_u));
+END;
+$$
+LANGUAGE plpgsql;
