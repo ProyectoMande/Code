@@ -5,7 +5,7 @@ const db = new Pool(
         host: "172.17.0.2", // hostname -i (del contenedor)
         user: "postgres",
         port: 5432,
-        password: "postgres",
+        password: "postgis",
         database: "mande"
     }
 );

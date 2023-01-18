@@ -40,9 +40,9 @@ trabajadorCtrl.addTrabajador = async (req, res) => {
 
     // Insertamos el trabajador a la bd
     const newTrabajador = await db.query(`INSERT INTO trabajador 
-        (celular, nombreCompleto, id, email, estado, gps_latitud, gps_longitud,
-            foto_perfil, img_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`, [
-                celular, nombreCompleto, id, email, estado, gps_latitud, gps_longitud, foto_perfil, img_id
+        (celular, nombreCompleto, id, email, estado, coordenada,
+            foto_perfil, img_id) VALUES ($1, $2, $3, $4, $5, POINT($6, $7), $8, $9) RETURNING *`, [
+                celular, nombreCompleto, id, email, estado, gps_longitud, gps_latitud, foto_perfil, img_id
             ]);
     
     console.log('Nuevo Trabajador = ', newTrabajador.rows[0]);

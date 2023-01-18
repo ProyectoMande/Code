@@ -18,8 +18,9 @@ CREATE TABLE trabajador(
     id VARCHAR(20),
     email VARCHAR(20),
     estado VARCHAR(20),
-    gps_latitud DOUBLE PRECISION NOT NULL,
-    gps_longitud DOUBLE PRECISION NOT NULL,
+    -- gps_latitud DOUBLE PRECISION NOT NULL,
+    -- gps_longitud DOUBLE PRECISION NOT NULL,
+    coordenada POINT NOT NULL,
     foto_perfil VARCHAR(100),
     img_id VARCHAR(100)
 );
@@ -30,8 +31,9 @@ CREATE TABLE usuario(
     nombreCompleto VARCHAR(20) NOT NULL,
     id VARCHAR(20),
     email VARCHAR(20),
-    gps_latitud DOUBLE PRECISION NOT NULL,
-    gps_longitud DOUBLE PRECISION NOT NULL,
+    -- gps_latitud DOUBLE PRECISION NOT NULL,
+    -- gps_longitud DOUBLE PRECISION NOT NULL,
+    coordenada POINT NOT NULL,
     tarjeta_numero TEXT NOT NULL, --Encriptado MD5
     tarjeta_fecha_vencimiento TEXT NOT NULL, --Encriptado MD5
     tarjeta_cvv TEXT NOT NULL --Encriptado MD5
