@@ -20,7 +20,7 @@ CREATE TABLE trabajador(
     estado VARCHAR(20),
     -- gps_latitud DOUBLE PRECISION NOT NULL,
     -- gps_longitud DOUBLE PRECISION NOT NULL,
-    coordenada POINT NOT NULL,
+    coordenada GEOMETRY NOT NULL,
     foto_perfil VARCHAR(100),
     img_id VARCHAR(100)
 );
@@ -33,7 +33,7 @@ CREATE TABLE usuario(
     email VARCHAR(20),
     -- gps_latitud DOUBLE PRECISION NOT NULL,
     -- gps_longitud DOUBLE PRECISION NOT NULL,
-    coordenada POINT NOT NULL,
+    coordenada GEOMETRY NOT NULL,
     tarjeta_numero TEXT NOT NULL, --Encriptado MD5
     tarjeta_fecha_vencimiento TEXT NOT NULL, --Encriptado MD5
     tarjeta_cvv TEXT NOT NULL --Encriptado MD5
@@ -95,27 +95,33 @@ SELECT id_labor, n_labor FROM (SELECT nombre AS n_labor, id AS id_labor FROM lab
             ON labor.id = trabajador_labor.id_labor) AS Labores
                 INNER JOIN trabajador ON trabajador.estado = 'disponible';
 
+-- Calidicacion promedio de cada trabajdor
+CREATE VIEW calificacion_promedio_trabajador AS
+    SELECT celular_trabajador, AVG(calificacion) AS promedio_calificacion 
+        FROM solicitud INNER JOIN calificacion
+            ON solicitud.id = calificacion.id_solicitud
+                GROUP BY celular_trabajador;
+
 
 -- fUNCION QUE RETORNA LA INFO DE LOS TRABAJDORES (disponibles) DE UNA LABOR
-CREATE OR REPLACE FUNCTION trabajadores_labor(labor_id INTEGER)
+CREATE OR REPLACE FUNCTION trabajadores_labor(labor_id INTEGER, celular_u VARCHAR)
 RETURNS SETOF "record" AS
 $$
 DECLARE r record;
 BEGIN
-    FOR r IN SELECT celular_trabajador, promedio_calificaion, gps_latitud, gps_longitud, precio_hora FROM
-    (SELECT celular_trabajador, promedio_calificaion, gps_latitud, gps_longitud FROM
-        (SELECT celular_trabajador, AVG(calificacion) AS promedio_calificaion FROM solicitud
-            INNER JOIN calificacion
-                ON solicitud.id = calificacion.id_solicitud
-                    GROUP BY celular_trabajador) AS calificacion
-                        INNER JOIN trabajador
-                            ON trabajador.celular = calificacion.celular_trabajador
-                                AND trabajador.estado = 'disponible')
-                                AS info_trabajador
-                                    NATURAL JOIN 
-                                        (SELECT precio_hora FROM trabajador_labor
-                                            WHERE id_labor = labor_id) AS precios_hora
-                                                ORDER BY precio_hora, promedio_calificaion
+    FOR r IN SELECT celular, nombreCompleto, COALESCE(promedio_calificacion, 0.0), precio_hora, ST_DistanceSphere(coor_t,coor_u) AS distancia FROM
+        (SELECT celular, nombreCompleto, promedio_calificacion, coor_t, precio_hora FROM
+            (SELECT celular, nombreCompleto, promedio_calificacion, coordenada AS coor_t 
+                FROM calificacion_promedio_trabajador
+                            RIGHT JOIN trabajador
+                                ON trabajador.celular = calificacion_promedio_trabajador.celular_trabajador
+                                    AND trabajador.estado = 'disponible') AS info_trabajador
+                                        NATURAL JOIN 
+                                            (SELECT precio_hora FROM trabajador_labor
+                                                WHERE id_labor = labor_id) AS precios_hora) AS t_info
+                                                    INNER JOIN (SELECT coordenada AS coor_u FROM usuario 
+                                                            WHERE celular = celular_u) AS usuario_info ON true
+                                                                ORDER BY precio_hora, promedio_calificacion, distancia
         LOOP
             RETURN NEXT r;
         END LOOP;
@@ -127,18 +133,4 @@ LANGUAGE plpgsql;
 -- FALTA LA DISTANCIA
 -- Para llamar se hace asi:
 --  select * from trabajadores_labor(1) AS
---      (celular_trabajador VARCHAR, avg DOUBLE PRECISION, gps_latitud DOUBLE PRECISION, gps_longitud DOUBLE PRECISION, precio_hora INTEGER);
-
-
--- Funcion que retornar las distancia entre dos coordenadas
--- ES NECESARIO POSTGIS
-CREATE OR REPLACE FUNCTION distancia_coordenadas
-    (lon_t DOUBLE PRECISION, lat_t DOUBLE PRECISION, 
-    lon_u DOUBLE PRECISION, lat_u DOUBLE PRECISION) 
-RETURNS DOUBLE PRECISION AS
-$$
-BEGIN
-    RETURN ST_DistanceSphere(ST_MakePoint(lon_t, lat_t),ST_MakePoint(lon_u, lat_u));
-END;
-$$
-LANGUAGE plpgsql;
+--      (celular VARCHAR, nombreCompleto VARCHAR, promedio_calificacion numeric, precio_hora integer, distancia double precision);
