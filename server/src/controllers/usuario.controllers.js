@@ -26,7 +26,7 @@ usuarioCtrl.addUsuario = async (req, res) => {
         (celular, nombreCompleto, id, email, coordenada, tarjeta_numero, tarjeta_fecha_vencimiento, 
             tarjeta_cvv)
             VALUES (
-                $1, $2, $3, $4, POINT($5, $6), MD5($7), MD5($8), MD5($9)
+                $1, $2, $3, $4, ST_Point($5, $6), MD5($7), MD5($8), MD5($9)
             ) RETURNING *`, 
             [celular, nombreCompleto, id, email, gps_longitud, gps_latitud, 
             tarjeta_numero, tarjeta_fecha_vencimiento, tarjeta_cvv]);
