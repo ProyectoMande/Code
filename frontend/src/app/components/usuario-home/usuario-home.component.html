@@ -9,7 +9,7 @@
                 <table class="table table-hover">
                     <tbody>
                         <tr class="table-primary" *ngFor="let labor of laboresDisponibles">
-                            <td (click)="trabajadores_labor($event)">{{ labor.n_labor }}</td>
+                            <td id="{{ labor.id_labor }}" (click)="trabajadores_labor($event)">{{ labor.n_labor }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -31,9 +31,12 @@
                   <th scope="col">Precio/Hora</th>
                 </tr>
               </thead>
-              <tbody>
-                  <tr class="table-primary">
-                      <td>algo</td>
+              <tbody *ngFor="let trabajador of trabajadoresDisponibles">
+                  <tr class="table-primary" id="{{ trabajador.celular }}">
+                      <td>{{ trabajador.nombrecompleto }}</td>
+                      <td>{{ trabajador.promedio_calificacion }}</td>
+                      <td>{{ trabajador.distancia }}</td>
+                      <td>{{ trabajador.precio_hora }}</td>
                   </tr>
               </tbody>
             </table>

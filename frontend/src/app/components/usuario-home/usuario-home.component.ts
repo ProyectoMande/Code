@@ -33,23 +33,20 @@ export class UsuarioHomeComponent {
   }
 
   trabajadores_labor(event: any){
-    const laborName = event.target.innerText;
-    let laborId = 0;
-    for(let labor of this.laboresDisponibles){
-      if(labor.n_labor == laborName){
-        const usuarioActual = this.usuarioService.getUsuarioActual();
-        console.log(usuarioActual)
-        this.employeeService.getTrabajadores_Labor(usuarioActual, labor.id_labor)
-          .subscribe(
-            res => { 
-              this.trabajadoresDisponibles = <any[]>res
-              console.log(this.trabajadoresDisponibles)
-            },
-            err => console.log(err)
-          );
-        break;
-      }
-    }
+    // Se obtienen los trabajdores disponibles
+    let laborId = event.target.id;
+    const usuarioActual = this.usuarioService.getUsuarioActual();
+    this.employeeService.getTrabajadores_Labor(usuarioActual, laborId)
+      .subscribe(
+        res => { 
+          this.trabajadoresDisponibles = <any[]>res
+          console.log(this.trabajadoresDisponibles)
+        },
+        err => console.log(err)
+      );
+
   }
+
+
 
 }
