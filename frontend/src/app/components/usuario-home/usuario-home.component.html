@@ -17,30 +17,55 @@
           </div>
 
       </div>
-    </div>
-    <div class="col-8">
-      <div class="card text-white bg-primary mb-1">
-        <div class="card-header">Trabajadores Disponibles</div>
-        <div class="card-body">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Nombre del Trabajador</th>
-                  <th scope="col">Numero de Estrellas</th>
-                  <th scope="col">Distancia</th>
-                  <th scope="col">Precio/Hora</th>
-                </tr>
-              </thead>
-              <tbody *ngFor="let trabajador of trabajadoresDisponibles">
-                  <tr class="table-primary" id="{{ trabajador.celular }}">
-                      <td>{{ trabajador.nombrecompleto }}</td>
-                      <td>{{ trabajador.promedio_calificacion }}</td>
-                      <td>{{ trabajador.distancia }}</td>
-                      <td>{{ trabajador.precio_hora }}</td>
-                  </tr>
-              </tbody>
-            </table>
+
+      <div class="container">
+        <div class="card text-white bg-secondary mb-3">
+          <div class="card-header">Descripcion Corta (Opcional)</div>
+          <div class="card-body">
+            <div class="form-group">
+              <textarea class="form-control" id="textarea" rows="3"></textarea>
+            </div>
+          </div>
         </div>
       </div>
+
+    </div>
+    <div class="col-8">
+
+      <div class="container">
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header">Trabajadores Disponibles</div>
+          <div class="card-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre del Trabajador</th>
+                    <th scope="col">Numero de Estrellas</th>
+                    <th scope="col">Distancia</th>
+                    <th scope="col">Precio/Hora</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let trabajador of trabajadoresDisponibles">
+                    <tr class="table-primary" id="{{ trabajador.celular }}">
+                        <td>{{ trabajador.nombrecompleto }}</td>
+                        <td>{{ trabajador.promedio_calificacion }}</td>
+                        <td>{{ trabajador.distancia }}</td>
+                        <td>{{ trabajador.precio_hora }}</td>
+                    </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="card text-white bg-secondary mb-3">
+          <div class="card-header">Datos de la transaccion</div>
+          <div class="card-body">
+            
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
