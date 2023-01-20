@@ -56,6 +56,15 @@ trabajadorCtrl.addTrabajador = async (req, res) => {
     }
 };
 
+trabajadorCtrl.getTrabajadores_Labor = async (req, res) => {
+    const { celularUsuario, laborId } = req.params;
+
+    const trabajadores_labor = await db.query(`SELECT * FROM trabajadores_labor($1, $2) AS
+    (celular VARCHAR, nombreCompleto VARCHAR, promedio_calificacion numeric, precio_hora integer, distancia double precision)`,
+    [laborId, celularUsuario]);
+    res.send(trabajadores_labor.rows);
+}
+
 trabajadorCtrl.updateTrabajador = (req, res) => {
     res.send("actualizando trabajador");
 };

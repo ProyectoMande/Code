@@ -7,6 +7,8 @@ import { Usuario } from '../models/usuario'
 })
 export class UsuarioService {
 
+  celularUsuarioActual: string;
+
   URI = 'http://localhost:4000/api/usuario'
 
   constructor(private http: HttpClient) { }
@@ -29,5 +31,13 @@ export class UsuarioService {
 
   getUsuario(celular: string){
     return this.http.get(`${this.URI}/${celular}`);
+  }
+
+  setUsuario(celular: string){
+    this.celularUsuarioActual = celular;
+  }
+
+  getUsuarioActual(){
+    return this.celularUsuarioActual;
   }
 }

@@ -9,7 +9,7 @@
                 <table class="table table-hover">
                     <tbody>
                         <tr class="table-primary" *ngFor="let labor of laboresDisponibles">
-                            <td>{{ labor.n_labor }}</td>
+                            <td (click)="trabajadores_labor($event)">{{ labor.n_labor }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -25,10 +25,10 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col">Type</th>
-                  <th scope="col">Column heading</th>
-                  <th scope="col">Column heading</th>
-                  <th scope="col">Column heading</th>
+                  <th scope="col">Nombre del Trabajador</th>
+                  <th scope="col">Numero de Estrellas</th>
+                  <th scope="col">Distancia</th>
+                  <th scope="col">Precio/Hora</th>
                 </tr>
               </thead>
               <tbody>

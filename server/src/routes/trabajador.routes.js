@@ -29,6 +29,9 @@ router.get('/', trabajadorCtrl.getTrabajador);
 // Obtener trabajador
 router.get('/:celular', trabajadorCtrl.getTrabajador);
 
+// Obtener trabajadores_labor (funcion de la bd)
+router.get('/:celularUsuario/:laborId', trabajadorCtrl.getTrabajadores_Labor);
+
 // Eliminar trabajador
 router.delete('/:celular', trabajadorCtrl.deleteTrabajador);
 
