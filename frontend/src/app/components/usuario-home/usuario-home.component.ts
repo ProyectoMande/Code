@@ -21,6 +21,16 @@ export class UsuarioHomeComponent {
   
   trabajadoresDisponibles: any[]; // Segun labor
 
+  trabajadorSeleccionado = {
+    celular: '', 
+    nombrecompleto: 'Seleccione un Trabajador', 
+    promedio_calificacion: '', 
+    precio_hora: 0, 
+    distancia: 0
+  };
+
+  horasAContratar = 1;
+
   ngOnInit() {
     this.laborService.getLaboresDisponibles().subscribe(
       res => {
@@ -44,9 +54,11 @@ export class UsuarioHomeComponent {
         },
         err => console.log(err)
       );
-
   }
 
-
+  setTrabajadorSeleccionado(trabajador: any){
+    this.trabajadorSeleccionado = trabajador;
+    console.log(this.trabajadorSeleccionado);
+  }
 
 }

@@ -46,7 +46,7 @@
                   </tr>
                 </thead>
                 <tbody *ngFor="let trabajador of trabajadoresDisponibles">
-                    <tr class="table-primary" id="{{ trabajador.celular }}">
+                    <tr class="table-primary" id="{{ trabajador.celular }}" (click)="setTrabajadorSeleccionado(trabajador)">
                         <td>{{ trabajador.nombrecompleto }}</td>
                         <td>{{ trabajador.promedio_calificacion }}</td>
                         <td>{{ trabajador.distancia }}</td>
@@ -65,15 +65,15 @@
             <div class="row">
               <div class="col-sm">
                 <label class="form-label">Horas a Contratar:</label>
-                <input type="number" min="1" class="form-control">
+                <input type="number" min="1" class="form-control" value="1" name="horasAContratar" [(ngModel)]="horasAContratar">
               </div>
               <div class="col-sm">
                 <label class="form-label">Trabajador:</label>
-                <h6>Nombre Trabajador</h6>
+                <h6>{{ trabajadorSeleccionado.nombrecompleto }}</h6>
               </div>
               <div class="col-sm">
                 <label class="form-label">Total a Pagar:</label>
-                <h6>$$$</h6>
+                <h6>{{ trabajadorSeleccionado.precio_hora * horasAContratar }}</h6>
               </div>
               <div class="col-sm">
                 <div class="d-grid">
