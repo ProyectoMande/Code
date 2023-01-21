@@ -24,7 +24,7 @@
           <div class="card-header">Descripcion Corta (Opcional)</div>
           <div class="card-body">
             <div class="form-group">
-              <textarea class="form-control" id="textarea" rows="3"></textarea>
+              <textarea class="form-control" id="textarea" rows="3" name="descripcion" [(ngModel)]="descripcion"></textarea>
             </div>
           </div>
         </div>
@@ -68,17 +68,17 @@
 
               <div class="col-sm">
                 <label class="form-label">Numero de Tarjeta:</label>
-                <input type="text" class="form-control" >
+                <input type="text" class="form-control" name="tarjeta_numero"  [(ngModel)]="infoTarjeta.tarjeta_numero">
               </div>
 
               <div class="col-sm">
                 <label class="form-label">Fecha de Vencimiento:</label>
-                <input type="date" class="form-control" >
+                <input type="date" class="form-control" name="tarjeta_fecha_vencimiento" [(ngModel)]="infoTarjeta.tarjeta_fecha_vencimiento">
               </div>
 
               <div class="col-sm">
                 <label class="form-label">CVV:</label>
-                <input type="text" class="form-control" >
+                <input type="text" class="form-control" name="tarjeta_cvv" [(ngModel)]="infoTarjeta.tarjeta_cvv">
               </div>
 
             </div>
@@ -103,7 +103,7 @@
               <div class="col-sm">
                 <div class="d-grid">
 
-                  <button class="btn btn-lg btn-primary" type="button" data-toggle="modal" data-target="#tarjeta">Pagar</button>
+                  <button class="btn btn-lg btn-primary" type="button" (click)="solicitarServicio()">Pagar</button>
                   
                 </div>
               </div>

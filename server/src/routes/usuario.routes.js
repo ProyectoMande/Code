@@ -17,4 +17,7 @@ router.post('/', multerUsuario, usuarioCtrl.addUsuario);
 // Obtener usuario
 router.get('/:celular', usuarioCtrl.getUsuario);
 
+// Solicitar servicio
+router.post('/servicio', usuarioCtrl.solicitarServicio);
+
 module.exports = router;

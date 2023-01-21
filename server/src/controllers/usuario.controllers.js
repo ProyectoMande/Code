@@ -48,4 +48,24 @@ usuarioCtrl.getUsuario = async (req, res) => {
     res.send(usuario.rows[0]);
 }
 
+usuarioCtrl.solicitarServicio = async (req, res) => {
+    // datos de la solicitud
+    const {
+        celular_trabajador,
+        celular_usuario,
+        descripcion,
+        pago
+    } = req.body
+
+    // Insertamos la solicitud
+    const solicitud = await db.query(`
+        INSERT INTO solicitud (celular_trabajador, celular_usuario, descripcion, pago)
+        VALUES ($1, $2, $3, $4) RETURNING *
+    `, [celular_trabajador, celular_usuario, descripcion, pago]);
+
+    // mostramos la solicutud b¿nueva
+    console.log(solicitud.rows[0]);
+
+}
+
 module.exports = usuarioCtrl;

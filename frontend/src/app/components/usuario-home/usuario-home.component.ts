@@ -31,6 +31,14 @@ export class UsuarioHomeComponent {
 
   horasAContratar = 1;
 
+  descripcion = "";
+
+  infoTarjeta = {
+    tarjeta_numero: "",
+    tarjeta_fecha_vencimiento: "",
+    tarjeta_cvv: ""
+  }
+
   ngOnInit() {
     this.laborService.getLaboresDisponibles().subscribe(
       res => {
@@ -59,6 +67,21 @@ export class UsuarioHomeComponent {
   setTrabajadorSeleccionado(trabajador: any){
     this.trabajadorSeleccionado = trabajador;
     console.log(this.trabajadorSeleccionado);
+  }
+
+  solicitarServicio(){
+    
+    const servicio = {
+      celular_trabajador: this.trabajadorSeleccionado.celular,
+      celular_usuario: this.usuarioService.getUsuarioActual(),
+      descripcion: this.descripcion,
+      pago: this.horasAContratar * this.trabajadorSeleccionado.precio_hora
+    }
+
+    console.log(servicio)
+    this.usuarioService.solicitarServicio(servicio).subscribe(
+      res => console.log(res), err => console.log(err)
+    );
   }
 
 }

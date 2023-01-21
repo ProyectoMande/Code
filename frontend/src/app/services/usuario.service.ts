@@ -40,4 +40,8 @@ export class UsuarioService {
   getUsuarioActual(){
     return this.celularUsuarioActual;
   }
+
+  solicitarServicio(servicio: any){
+    return this.http.post(`${this.URI}/servicio`, servicio);
+  }
 }
