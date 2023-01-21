@@ -12,7 +12,6 @@ import { EmployeeLoginComponent } from './components/employee-login/employee-log
 import { TrabajadorHomeComponent } from './components/trabajador-home/trabajador-home.component';
 import { NavbarInicioComponent } from './components/navbar-inicio/navbar-inicio.component';
 import { NavbarTrabajadorHomeComponent } from './components/navbar-trabajador-home/navbar-trabajador-home.component';
-import { NotificacionesTrabajadorComponent } from './components/notificaciones-trabajador/notificaciones-trabajador.component';
 import { UsuarioHomeComponent } from './components/usuario-home/usuario-home.component';
 import { UsuarioLoginComponent } from './components/usuario-login/usuario-login.component';
 
@@ -26,7 +25,6 @@ import { UsuarioLoginComponent } from './components/usuario-login/usuario-login.
     TrabajadorHomeComponent,
     NavbarInicioComponent,
     NavbarTrabajadorHomeComponent,
-    NotificacionesTrabajadorComponent,
     UsuarioHomeComponent,
     UsuarioLoginComponent
   ],

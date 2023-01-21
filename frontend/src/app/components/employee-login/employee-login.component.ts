@@ -23,6 +23,7 @@ export class EmployeeLoginComponent {
         }
         else {
           console.log('Trabajador hallado')
+          this.employeeService.setTrabajadorActual(this.celular)
           this.router.navigate(['trabajador-home'])
         }
       },

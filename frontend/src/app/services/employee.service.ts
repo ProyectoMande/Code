@@ -9,6 +9,8 @@ export class EmployeeService {
 
   URI = 'http://localhost:4000/api/trabajador'
 
+  trabajadorActual = '' // Celular trabajdor
+
   constructor(private http: HttpClient) { }
 
   addTrabajador(trabajador: Trabajador, fotoPerfil: File, fotoId: File, laboresTrabajador: any[]) {
@@ -36,5 +38,17 @@ export class EmployeeService {
   // Se obtiene la funcion trabajadores_labor de la bd
   getTrabajadores_Labor(celularUsuarioActual: string, laborId: number){
     return this.http.get(`${this.URI}/trabajadores_labor/${celularUsuarioActual}/${laborId}`);
+  }
+
+  getSolicitud(celular: string){
+    return this.http.get(`${this.URI}/solicitud/${celular}`);
+  }
+
+  setTrabajadorActual(celular: string){
+    this.trabajadorActual = celular;
+  }
+
+  getTrabajadorActual(){
+    return this.trabajadorActual;
   }
 }
