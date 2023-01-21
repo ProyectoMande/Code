@@ -55,6 +55,8 @@ CREATE TABLE solicitud(
     celular_usuario VARCHAR(20) NOT NULL,
     descripcion VARCHAR(200),
     pago DOUBLE PRECISION NOT NULL,
+    -- Nuevo atributo
+    finalizada BOOLEAN DEFAULT FALSE,
     CONSTRAINT fk_trabajador_solicitud
         FOREIGN KEY (celular_trabajador) REFERENCES trabajador(celular),
     CONSTRAINT fk_usuario_solicitud
