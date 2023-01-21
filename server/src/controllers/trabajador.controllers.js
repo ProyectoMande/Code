@@ -1,7 +1,7 @@
 const db = require('../database');
 const path = require('path');
 
-const getCoordenadas = require('./controllers');
+const { getCoordenadas, getDireccion } = require('./controllers');
 
 const trabajadorCtrl = {};
 
@@ -63,6 +63,27 @@ trabajadorCtrl.getTrabajadores_Labor = async (req, res) => {
     (celular VARCHAR, nombreCompleto VARCHAR, promedio_calificacion numeric, precio_hora integer, distancia double precision)`,
     [laborId, celularUsuario]);
     res.send(trabajadores_labor.rows);
+}
+
+trabajadorCtrl.getSolicitud = async (req,  res) => {
+
+    const celular_trabajador = req.params.celular
+
+    // Se obtiene la solicitud
+    const solicitud = await db.query(`
+    SELECT * FROM solicitud_trabajador($1) AS
+    (long double precision, lat double precision, labor_name varchar, id_solicitud integer);
+    `, [celular_trabajador]);
+
+    const solicitud_trabajador = solicitud.rows[0];
+
+    const direccion= await getDireccion(solicitud_trabajador.long, solicitud_trabajador.lat);
+
+    res.send({
+        direccion,
+        labor_name: solicitud_trabajador.labor_name,
+        id_solicitud: solicitud_trabajador.id_solicitud
+    })
 }
 
 trabajadorCtrl.updateTrabajador = (req, res) => {

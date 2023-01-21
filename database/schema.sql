@@ -145,6 +145,28 @@ END;
 $$
 LANGUAGE plpgsql;
 
+-- Funcion que muestra la solicitud pediente de un trabajador
+CREATE OR REPLACE FUNCTION solicitud_trabajador(trabajador_celular VARCHAR)
+RETURNS SETOF "record" AS
+$$
+DECLARE r record;
+BEGIN
+    FOR r IN SELECT ST_X(coordenada) AS long, ST_Y(coordenada) AS lat, nombre AS labor_name, id_solicitud FROM (
+        SELECT coordenada, id_labor, solicitud.id AS id_solicitud FROM solicitud 
+            INNER JOIN usuario ON solicitud.celular_usuario = usuario.celular
+                WHERE finalizada = FALSE AND celular_trabajador = trabajador_celular
+        ) AS sub INNER JOIN labor ON labor.id = sub.id_labor
+        LOOP
+            RETURN NEXT r;
+        END LOOP;
+    RETURN;
+END;
+$$
+LANGUAGE plpgsql;
+-- Para llamr la funcion anterior:
+-- select * from solicitud_trabajador('3012289097') as
+-- (long double precision, lat double precision, labor_name varchar, id_solicitud integer);
+
 -- ############# TRIGGERS ################ --
 
 -- Trigger que ejecuta la funcion solicitud_insert_trigger()

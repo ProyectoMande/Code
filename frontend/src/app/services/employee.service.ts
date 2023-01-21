@@ -35,6 +35,6 @@ export class EmployeeService {
 
   // Se obtiene la funcion trabajadores_labor de la bd
   getTrabajadores_Labor(celularUsuarioActual: string, laborId: number){
-    return this.http.get(`${this.URI}/${celularUsuarioActual}/${laborId}`);
+    return this.http.get(`${this.URI}/trabajadores_labor/${celularUsuarioActual}/${laborId}`);
   }
 }

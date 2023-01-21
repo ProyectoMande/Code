@@ -30,13 +30,10 @@ router.get('/', trabajadorCtrl.getTrabajador);
 router.get('/:celular', trabajadorCtrl.getTrabajador);
 
 // Obtener trabajadores_labor (funcion de la bd)
-router.get('/:celularUsuario/:laborId', trabajadorCtrl.getTrabajadores_Labor);
+router.get('/trabajadores_labor/:celularUsuario/:laborId', trabajadorCtrl.getTrabajadores_Labor);
 
-// Eliminar trabajador
-router.delete('/:celular', trabajadorCtrl.deleteTrabajador);
-
-// Actualizar trabajador
-router.put('/:celular', trabajadorCtrl.updateTrabajador);
+// Obtener la solicitud pendiente del trabajdor
+router.get('/solicitud/:celular', trabajadorCtrl.getSolicitud);
 
 // Se exporta el objeto router
 // Es decir, cuando se importe este archivo, se importara dicho objeto
