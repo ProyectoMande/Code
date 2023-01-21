@@ -1,15 +1,4 @@
--- Crea database
-CREATE DATABASE mande
-    WITH 
-    OWNER = postgres
-    ENCODING = 'UTF8'
-    LC_COLLATE = 'C'
-    LC_CTYPE = 'C'
-    TABLESPACE = pg_default
-    TEMPLATE template0;
-
--- Coneccion DB mande
-\c mande
+-- ######################## SCHEMA ################## --
 
 -- Tabla trabajador
 CREATE TABLE trabajador(
@@ -92,6 +81,9 @@ INSERT INTO labor (nombre) VALUES
     ('plomero'),
     ('cerrajero');
 
+
+-- ################# VISTAS ################# --
+
 -- Obtener Labores Disponibles (Con Trabajadores Disponibles)
 CREATE VIEW labores_disponibles AS
 SELECT id_labor, n_labor FROM (SELECT nombre AS n_labor, id AS id_labor FROM labor  
@@ -106,6 +98,8 @@ CREATE VIEW calificacion_promedio_trabajador AS
             ON solicitud.id = calificacion.id_solicitud
                 GROUP BY celular_trabajador;
 
+
+-- ################### FUNCIONES ############ --
 
 -- fUNCION QUE RETORNA LA INFO DE LOS TRABAJDORES (disponibles) DE UNA LABOR
 CREATE OR REPLACE FUNCTION trabajadores_labor(labor_id INTEGER, celular_u VARCHAR)
@@ -134,7 +128,23 @@ END;
 $$
 LANGUAGE plpgsql;
 -- Esta funcion se puede extraer en varias vistas o funciones para mejorar su lectura
--- FALTA LA DISTANCIA
 -- Para llamar se hace asi:
 --  select * from trabajadores_labor(1) AS
 --      (celular VARCHAR, nombreCompleto VARCHAR, promedio_calificacion numeric, precio_hora integer, distancia double precision);
+
+-- Funcion trigger que cambia el estado de un trabajador a ocupado si se le hace una solicitud
+CREATE FUNCTION solicitud_insert_trigger() 
+RETURNS TRIGGER AS
+$$
+BEGIN
+    UPDATE trabajador SET estado = 'ocupado' WHERE celular = NEW.celular_trabajador;
+    RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+-- ############# TRIGGERS ################ --
+
+-- Trigger que ejecuta la funcion solicitud_insert_trigger()
+CREATE TRIGGER solicitud_trigger AFTER INSERT ON solicitud
+FOR EACH ROW EXECUTE PROCEDURE solicitud_insert_trigger();
