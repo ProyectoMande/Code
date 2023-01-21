@@ -1,4 +1,5 @@
 <app-navbar-trabajador-home></app-navbar-trabajador-home>
+
 <div class="row">
     <div class="col-4">
       <div class="container">
@@ -62,6 +63,30 @@
         <div class="card text-white bg-secondary mb-3">
           <div class="card-header">Datos de la transaccion</div>
           <div class="card-body">
+
+            <div class="row">
+
+              <div class="col-sm">
+                <label class="form-label">Numero de Tarjeta:</label>
+                <input type="text" class="form-control" >
+              </div>
+
+              <div class="col-sm">
+                <label class="form-label">Fecha de Vencimiento:</label>
+                <input type="date" class="form-control" >
+              </div>
+
+              <div class="col-sm">
+                <label class="form-label">CVV:</label>
+                <input type="text" class="form-control" >
+              </div>
+
+            </div>
+
+            <div class="row">
+              <hr>
+            </div>
+
             <div class="row">
               <div class="col-sm">
                 <label class="form-label">Horas a Contratar:</label>
@@ -77,7 +102,9 @@
               </div>
               <div class="col-sm">
                 <div class="d-grid">
-                  <button class="btn btn-lg btn-primary" type="button">Pagar</button>
+
+                  <button class="btn btn-lg btn-primary" type="button" data-toggle="modal" data-target="#tarjeta">Pagar</button>
+                  
                 </div>
               </div>
             </div>
