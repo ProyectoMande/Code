@@ -52,6 +52,7 @@ usuarioCtrl.solicitarServicio = async (req, res) => {
     // datos de la solicitud
     const {
         celular_trabajador,
+        id_labor,
         celular_usuario,
         descripcion,
         pago
@@ -59,9 +60,9 @@ usuarioCtrl.solicitarServicio = async (req, res) => {
 
     // Insertamos la solicitud
     const solicitud = await db.query(`
-        INSERT INTO solicitud (celular_trabajador, celular_usuario, descripcion, pago)
-        VALUES ($1, $2, $3, $4) RETURNING *
-    `, [celular_trabajador, celular_usuario, descripcion, pago]);
+        INSERT INTO solicitud (celular_trabajador, id_labor, celular_usuario, descripcion, pago)
+        VALUES ($1, $2, $3, $4, $5) RETURNING *
+    `, [celular_trabajador, id_labor, celular_usuario, descripcion, pago]);
 
     // mostramos la solicutud b¿nueva
     console.log(solicitud.rows[0]);

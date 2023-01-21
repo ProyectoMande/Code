@@ -29,6 +29,8 @@ export class UsuarioHomeComponent {
     distancia: 0
   };
 
+  laborSeleccionada: number;
+
   horasAContratar = 1;
 
   descripcion = "";
@@ -52,9 +54,9 @@ export class UsuarioHomeComponent {
 
   trabajadores_labor(event: any){
     // Se obtienen los trabajdores disponibles
-    let laborId = event.target.id;
+    this.laborSeleccionada = event.target.id;
     const usuarioActual = this.usuarioService.getUsuarioActual();
-    this.employeeService.getTrabajadores_Labor(usuarioActual, laborId)
+    this.employeeService.getTrabajadores_Labor(usuarioActual, this.laborSeleccionada)
       .subscribe(
         res => { 
           this.trabajadoresDisponibles = <any[]>res
@@ -73,6 +75,7 @@ export class UsuarioHomeComponent {
     
     const servicio = {
       celular_trabajador: this.trabajadorSeleccionado.celular,
+      id_labor: this.laborSeleccionada,
       celular_usuario: this.usuarioService.getUsuarioActual(),
       descripcion: this.descripcion,
       pago: this.horasAContratar * this.trabajadorSeleccionado.precio_hora

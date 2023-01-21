@@ -61,13 +61,17 @@ CREATE TABLE trabajador_labor(
 CREATE TABLE solicitud(
     id SERIAL PRIMARY KEY,
     celular_trabajador VARCHAR(20) NOT NULL,
+    -- Nuevo atributo
+    id_labor INTEGER NOT NULL,
     celular_usuario VARCHAR(20) NOT NULL,
     descripcion VARCHAR(200),
     pago DOUBLE PRECISION NOT NULL,
     CONSTRAINT fk_trabajador_solicitud
         FOREIGN KEY (celular_trabajador) REFERENCES trabajador(celular),
     CONSTRAINT fk_usuario_solicitud
-        FOREIGN KEY (celular_usuario) REFERENCES usuario(celular)
+        FOREIGN KEY (celular_usuario) REFERENCES usuario(celular),
+    CONSTRAINT fk_labor_solicitud
+        FOREIGN KEY (id_labor) REFERENCES labor(id)
 );
 
 -- Tabla calificacion
