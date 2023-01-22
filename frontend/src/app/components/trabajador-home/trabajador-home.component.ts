@@ -13,19 +13,36 @@ export class TrabajadorHomeComponent {
   trabajadorActual: string; // celular del trabajdor
 
   solicitud = {
-    direccion: 'No hay',
+    direccion: 'Solictud',
     id_solicitud: 0,
-    labor_name: 'Solictud'
+    labor_name: 'No hay'
   }
 
   ngOnInit() {
     this.trabajadorActual = this.employeeService.getTrabajadorActual();
     this.employeeService.getSolicitud(this.trabajadorActual).subscribe(
       res => {
-        this.solicitud = <any>res;
+        if(res != null){
+          this.solicitud = <any>res;
+        }
       }, 
       err => console.log(err)
     )
+  }
+
+  laborRealizada(){
+    // Si hay solicitud
+    if(this.solicitud.direccion != 'Solictud'){
+      this.employeeService.solicitudRealizada(this.solicitud.id_solicitud).subscribe(
+        res => console.log(res),
+        err => console.log(err)
+      )
+      this.solicitud = {
+        direccion: 'Solictud',
+        id_solicitud: 0,
+        labor_name: 'No hay'
+      }
+    }
   }
 
 }

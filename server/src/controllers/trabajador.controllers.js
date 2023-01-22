@@ -77,21 +77,28 @@ trabajadorCtrl.getSolicitud = async (req,  res) => {
 
     const solicitud_trabajador = solicitud.rows[0];
 
-    const direccion= await getDireccion(solicitud_trabajador.long, solicitud_trabajador.lat);
+    if (solicitud_trabajador != null){
+        const direccion= await getDireccion(solicitud_trabajador.long, solicitud_trabajador.lat);
 
-    res.send({
-        direccion,
-        labor_name: solicitud_trabajador.labor_name,
-        id_solicitud: solicitud_trabajador.id_solicitud
-    })
+        res.send({
+            direccion,
+            labor_name: solicitud_trabajador.labor_name,
+            id_solicitud: solicitud_trabajador.id_solicitud
+        })
+    }
+    else { res.send(null) }
+    
 }
 
-trabajadorCtrl.updateTrabajador = (req, res) => {
-    res.send("actualizando trabajador");
-};
+trabajadorCtrl.solicitudTerminada = async (req, res) => {
 
-trabajadorCtrl.deleteTrabajador = (req, res) => {
-    res.send("elimiando trabajador");
-};
+    const id_solicitud = req.params.id_solicitud;
+
+    const solicitud_terminada = await db.query(`
+        UPDATE solicitud SET finalizada = TRUE WHERE id = $1 RETURNING *
+    `, [id_solicitud]);
+
+    console.log(solicitud_terminada.rows[0]);
+}
 
 module.exports = trabajadorCtrl;

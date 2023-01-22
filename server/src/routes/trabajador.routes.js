@@ -35,6 +35,8 @@ router.get('/trabajadores_labor/:celularUsuario/:laborId', trabajadorCtrl.getTra
 // Obtener la solicitud pendiente del trabajdor
 router.get('/solicitud/:celular', trabajadorCtrl.getSolicitud);
 
+router.put('/solicitud_terminada/:id_solicitud', trabajadorCtrl.solicitudTerminada);
+
 // Se exporta el objeto router
 // Es decir, cuando se importe este archivo, se importara dicho objeto
 module.exports = router;
