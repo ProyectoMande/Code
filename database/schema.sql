@@ -3,9 +3,9 @@
 -- Tabla trabajador
 CREATE TABLE trabajador(
     celular VARCHAR(20) PRIMARY KEY,
-    nombreCompleto VARCHAR(20) NOT NULL,
+    nombreCompleto VARCHAR(50) NOT NULL,
     id VARCHAR(20),
-    email VARCHAR(20),
+    email VARCHAR(50),
     estado VARCHAR(20),
     -- gps_latitud DOUBLE PRECISION NOT NULL,
     -- gps_longitud DOUBLE PRECISION NOT NULL,
@@ -17,9 +17,9 @@ CREATE TABLE trabajador(
 -- Tabla usuario
 CREATE TABLE usuario(
     celular VARCHAR(20) PRIMARY KEY,
-    nombreCompleto VARCHAR(20) NOT NULL,
+    nombreCompleto VARCHAR(50) NOT NULL,
     id VARCHAR(20),
-    email VARCHAR(20),
+    email VARCHAR(50),
     -- gps_latitud DOUBLE PRECISION NOT NULL,
     -- gps_longitud DOUBLE PRECISION NOT NULL,
     coordenada GEOMETRY NOT NULL,
