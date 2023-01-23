@@ -33,7 +33,7 @@
     </div>
     <div class="col-8">
 
-      <div class="container">
+      <div class="container" *ngIf="(solicitudesPorCalificar.length == 0), else solicitudesPendientes">
         <div class="card text-white bg-primary mb-3">
           <div class="card-header">Trabajadores Disponibles</div>
           <div class="card-body">
@@ -58,6 +58,37 @@
           </div>
         </div>
       </div>
+
+      <ng-template #solicitudesPendientes>
+        <div class="container">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Califica tus servicios</div>
+            <div class="card-body">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nombre del Trabajador</th>
+                      <th scope="col">Labor</th>
+                      <th scope="col">Calificacion</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let calificacion_pendiente of solicitudesPorCalificar">
+                      <tr class="table-primary">
+                          <td>{{ calificacion_pendiente.nombre_trabajador }}</td>
+                          <td>{{ calificacion_pendiente.labor_name }}</td>
+                          <td>
+                            <input type="number" min="0" max="5" class="form-control" name="calificacion" [(ngModel)]="calificacion_pendiente.calificacion">
+                          </td>
+                          <td>
+                            <button type="submit" class="btn btn-primary" (click)="calificarSolicitud(calificacion_pendiente)">Calificar</button>
+                          </td>
+                      </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+      </ng-template>
 
       <div class="container">
         <div class="card text-white bg-secondary mb-3">

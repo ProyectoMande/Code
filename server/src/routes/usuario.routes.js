@@ -20,4 +20,10 @@ router.get('/:celular', usuarioCtrl.getUsuario);
 // Solicitar servicio
 router.post('/servicio', usuarioCtrl.solicitarServicio);
 
+// Obtener calificaciones pendientes
+router.get('/calificaciones_pendientes/:celular', usuarioCtrl.getCalificacionesPendientes);
+
+// Añadir calificacion
+router.post('/calificacion_nueva', usuarioCtrl.addCalificacion);
+
 module.exports = router;

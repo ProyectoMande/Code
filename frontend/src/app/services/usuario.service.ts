@@ -44,4 +44,19 @@ export class UsuarioService {
   solicitarServicio(servicio: any){
     return this.http.post(`${this.URI}/servicio`, servicio);
   }
+
+  getCalificacionesPendientes(celular: string){
+    return this.http.get(`${this.URI}/calificaciones_pendientes/${celular}`);
+  }
+
+  addCalificacion(calificacion: any, celular_usuario: string){
+
+    const calificacionNueva = {
+      celular_usuario: celular_usuario,
+      id_solicitud: calificacion.solicitud_id,
+      calificacion: calificacion.calificacion
+    }
+
+    return this.http.post(`${this.URI}/calificacion_nueva`, calificacionNueva);
+  }
 }

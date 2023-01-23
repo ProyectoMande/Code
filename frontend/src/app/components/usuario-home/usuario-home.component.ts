@@ -17,6 +17,10 @@ export class UsuarioHomeComponent {
     private usuarioService: UsuarioService
   ){}
 
+  usuarioActual: string; // celular del usuario actual
+
+  solicitudesPorCalificar: any[] = [];
+
   laboresDisponibles: any[];
   
   trabajadoresDisponibles: any[]; // Segun labor
@@ -42,6 +46,10 @@ export class UsuarioHomeComponent {
   }
 
   ngOnInit() {
+    // Se asigna el usuario actual
+    this.usuarioActual = this.usuarioService.getUsuarioActual();
+
+    // Se obtienen las labores dispobinles
     this.laborService.getLaboresDisponibles().subscribe(
       res => {
         const lab_disponibles = <any[]>res;
@@ -50,6 +58,18 @@ export class UsuarioHomeComponent {
       },
       err => console.log(err)
     );
+    
+    // Se obtienen las calificaciones pendientes
+    this.usuarioService.getCalificacionesPendientes(this.usuarioActual).subscribe(
+      res => {
+        this.solicitudesPorCalificar = <any[]>res;
+        for(let spc of this.solicitudesPorCalificar){
+          spc.calificacion = 0
+        }
+        console.log(this.solicitudesPorCalificar);
+      },
+      err => console.log(err)
+    )
   }
 
   trabajadores_labor(event: any){
@@ -85,6 +105,14 @@ export class UsuarioHomeComponent {
     this.usuarioService.solicitarServicio(servicio).subscribe(
       res => console.log(res), err => console.log(err)
     );
+  }
+
+  calificarSolicitud(solicitud: any){
+    this.usuarioService.addCalificacion(solicitud, this.usuarioActual).subscribe(
+      res => console.log(res), err => console.log(err)
+    );
+
+    this.solicitudesPorCalificar = this.solicitudesPorCalificar.filter(s => s != solicitud);
   }
 
 }

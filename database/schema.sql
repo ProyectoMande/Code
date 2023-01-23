@@ -3,9 +3,9 @@
 -- Tabla trabajador
 CREATE TABLE trabajador(
     celular VARCHAR(20) PRIMARY KEY,
-    nombreCompleto VARCHAR(50) NOT NULL,
+    nombreCompleto VARCHAR(20) NOT NULL,
     id VARCHAR(20),
-    email VARCHAR(50),
+    email VARCHAR(20),
     estado VARCHAR(20),
     -- gps_latitud DOUBLE PRECISION NOT NULL,
     -- gps_longitud DOUBLE PRECISION NOT NULL,
@@ -17,9 +17,9 @@ CREATE TABLE trabajador(
 -- Tabla usuario
 CREATE TABLE usuario(
     celular VARCHAR(20) PRIMARY KEY,
-    nombreCompleto VARCHAR(50) NOT NULL,
+    nombreCompleto VARCHAR(20) NOT NULL,
     id VARCHAR(20),
-    email VARCHAR(50),
+    email VARCHAR(20),
     -- gps_latitud DOUBLE PRECISION NOT NULL,
     -- gps_longitud DOUBLE PRECISION NOT NULL,
     coordenada GEOMETRY NOT NULL,
@@ -145,6 +145,20 @@ END;
 $$
 LANGUAGE plpgsql;
 
+-- Funcion trigger que cambia el estado de un trabajador a disponible cuando se actualiza
+-- el atributo "finalizado" de una solicitud
+CREATE FUNCTION solicitud_update_trigger() 
+RETURNS TRIGGER AS
+$$
+BEGIN
+    IF NEW.finalizada THEN
+        UPDATE trabajador SET estado = 'disponible' WHERE celular = NEW.celular_trabajador;
+    END IF;
+    RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
 -- Funcion que muestra la solicitud pediente de un trabajador
 CREATE OR REPLACE FUNCTION solicitud_trabajador(trabajador_celular VARCHAR)
 RETURNS SETOF "record" AS
@@ -167,8 +181,17 @@ LANGUAGE plpgsql;
 -- select * from solicitud_trabajador('3012289097') as
 -- (long double precision, lat double precision, labor_name varchar, id_solicitud integer);
 
+-- asdasdasdasd
+SELECT celular_trabajador, id_labor, id FROM (
+    SELECT * FROM solicitud LEFT JOIN calificacion ON solicitud.id = calificacion.id_solicitud 
+        WHERE finalizada AND solicitud.celular_usuario = '3014715234'
+) AS cal
+
 -- ############# TRIGGERS ################ --
 
 -- Trigger que ejecuta la funcion solicitud_insert_trigger()
-CREATE TRIGGER solicitud_trigger AFTER INSERT ON solicitud
+CREATE TRIGGER solicitud_insert_trigger AFTER INSERT ON solicitud
 FOR EACH ROW EXECUTE PROCEDURE solicitud_insert_trigger();
+
+CREATE TRIGGER solicitud_update_trigger AFTER UPDATE ON solicitud
+FOR EACH ROW EXECUTE PROCEDURE solicitud_update_trigger();

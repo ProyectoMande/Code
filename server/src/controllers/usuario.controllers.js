@@ -69,4 +69,26 @@ usuarioCtrl.solicitarServicio = async (req, res) => {
 
 }
 
+usuarioCtrl.getCalificacionesPendientes = async (req, res) => {
+    
+    const { celular } = req.params;
+
+    const calificaciones_pendientes = await db.query(`
+        SELECT * FROM calificaciones_pendientes($1) AS 
+            (nombre_trabajador VARCHAR, labor_name VARCHAR, solicitud_id INTEGER)
+    `, [celular]);
+
+    res.send(calificaciones_pendientes.rows);
+}
+
+usuarioCtrl.addCalificacion = async (req, res) => {
+
+    const { celular_usuario, id_solicitud, calificacion } = req.body;
+
+    const calificacionNueva = await db.query(`
+        INSERT INTO calificacion (celular_usuario, id_solicitud, calificacion) 
+            VALUES ($1, $2, $3)
+    `, [celular_usuario, id_solicitud, calificacion]);
+}
+
 module.exports = usuarioCtrl;
