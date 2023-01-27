@@ -27,6 +27,11 @@ function comprobarDatos(elementos){
     if (elementosValores.every(elemento => elemento)){
         $('#alertSiDetails').html('');
         $('#alertSi').show();
+        //Limpiar los campos de texto
+        elementos.forEach((elemento) => {
+            elemento.value = '';
+        })
+
     } else {
         $('#alertNoDetails').html('');
         $('#alertNo').show();
@@ -38,9 +43,8 @@ function comprobarDatos(elementos){
             }
         })
 
-        window.scrollTo(0, document.body.scrollHeight);
-
     }
+    window.scrollTo(0, document.body.scrollHeight);
  }
 
 //-------------------------------------------------------------------------
