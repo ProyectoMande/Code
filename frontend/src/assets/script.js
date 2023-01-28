@@ -27,6 +27,7 @@ function comprobarDatos(elementos){
     if (elementosValores.every(elemento => elemento)){
         $('#alertSiDetails').html('');
         $('#alertSi').show();
+        
         //Limpiar los campos de texto
         elementos.forEach((elemento) => {
             elemento.value = '';
