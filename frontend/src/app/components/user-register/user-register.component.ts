@@ -36,10 +36,24 @@ export class UserRegisterComponent {
   }
 
   addUsuario(){
-    this.usuarioService.addUsuario(this.usuarioNuevo, this.reciboImage)
+
+    //Se comprueba si cada uno de los campos del usuario contiene un valor en específico, en caso contrario
+    //Simplemente no envia los datos al servidor
+    if (Object.values(this.usuarioNuevo).every(value => value)){
+      
+      //Agrega el usuario al servidor
+      this.usuarioService.addUsuario(this.usuarioNuevo, this.reciboImage)
       .subscribe(
         res => console.log(res), err => console.log(err)
       );
+      return false
+
+    } else {
+      
+      //No agrega al usuario al servidor porque los datos se encuentran imcompletos
+      console.log("Los datos se encuentran incompletos")
+      return false
+    }
   }
 
   ngOnInit() {

@@ -76,7 +76,6 @@ export class EmployeeRegisterComponent {
     //Se comprueba si cada uno de los campos del trabajador contiene un valor en específico, en caso contrario
     //Simplemente no envia los datos al servidor
     if (Object.values(this.nuevoTrabajador).every(value => value)){
-      alert("Positivo")
 
       // Utilizamos el servicio employeeRegister para enviar los datos
       this.employeeService.addTrabajador(this.nuevoTrabajador, this.fotoPerfil, this.fotoId, this.laboresTrabajador).subscribe(
@@ -89,8 +88,8 @@ export class EmployeeRegisterComponent {
       console.log("Los datos se encuentran incompletos")
       return false
     }
-  } 
-
+  }
+  
   addLabor(event: any):void {
     console.log(this.labores);
   }
