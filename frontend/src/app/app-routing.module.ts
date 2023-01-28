@@ -8,6 +8,7 @@ import { EmployeeLoginComponent } from './components/employee-login/employee-log
 import { TrabajadorHomeComponent } from './components/trabajador-home/trabajador-home.component';
 import { UsuarioHomeComponent } from './components/usuario-home/usuario-home.component';
 import { UsuarioLoginComponent } from "./components/usuario-login/usuario-login.component";
+import { UsuarioActualizarComponent } from "./components/usuario-actualizar/usuario-actualizar.component"
 
 
 //rutas de navegacion
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'employee-login',component: EmployeeLoginComponent},
   {path: 'usuario-login',component: UsuarioLoginComponent},
   {path: 'trabajador-home',component: TrabajadorHomeComponent},
-  {path: 'usuario-home',component: UsuarioHomeComponent}
+  {path: 'usuario-home',component: UsuarioHomeComponent},
+  {path: 'usuario-actualizar',component: UsuarioActualizarComponent}
 ];
 
 @NgModule({
