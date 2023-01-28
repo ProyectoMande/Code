@@ -1,5 +1,5 @@
 const db = require('../database');
-const getCoordenadas = require('./controllers');
+const {getCoordenadas} = require('./controllers');
 
 const usuarioCtrl = {};
 
