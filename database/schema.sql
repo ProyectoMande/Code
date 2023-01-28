@@ -181,12 +181,6 @@ LANGUAGE plpgsql;
 -- select * from solicitud_trabajador('3012289097') as
 -- (long double precision, lat double precision, labor_name varchar, id_solicitud integer);
 
--- asdasdasdasd
-SELECT celular_trabajador, id_labor, id FROM (
-    SELECT * FROM solicitud LEFT JOIN calificacion ON solicitud.id = calificacion.id_solicitud 
-        WHERE finalizada AND solicitud.celular_usuario = '3014715234'
-) AS cal
-
 -- ############# TRIGGERS ################ --
 
 -- Trigger que ejecuta la funcion solicitud_insert_trigger()
