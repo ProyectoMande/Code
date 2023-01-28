@@ -1,12 +1,11 @@
-
 const { Pool }= require('pg');
 
 const db = new Pool(
     {
-        host: "172.17.0.2", // hostname -i (del contenedor)
+        host: "database",
         user: "postgres",
         port: 5432,
-        password: "postgis",
+        password: "postgres",
         database: "postgres"
     }
 );

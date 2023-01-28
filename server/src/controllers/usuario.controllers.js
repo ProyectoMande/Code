@@ -16,10 +16,17 @@ usuarioCtrl.addUsuario = async (req, res) => {
         tarjeta_cvv
      } = req.body;
 
-    const coordenadas = await getCoordenadas(direccion);
-    // coordenadas
-    const gps_latitud = coordenadas.y;
-    const gps_longitud = coordenadas.x;
+     const coordenadas = await getCoordenadas(direccion);
+
+     //Comprobamos si las coordenadas se encuentran definidas o no
+     if (coordenadas){
+         //Se guardan las coordenadas en sus respectivas variables
+         const gps_latitud = coordenadas.y;
+         const gps_longitud = coordenadas.x;    
+     } else {
+         console.log("Las coordenadas no se encuentran definidas")
+         return false;
+     }
     
     // Agregamos el usuario a la db
     const newUsuario = await db.query(`INSERT INTO usuario 
