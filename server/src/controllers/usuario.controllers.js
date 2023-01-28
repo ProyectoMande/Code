@@ -91,4 +91,20 @@ usuarioCtrl.addCalificacion = async (req, res) => {
     `, [celular_usuario, id_solicitud, calificacion]);
 }
 
+usuarioCtrl.verificarTarjeta = async (req, res) => {
+    // Obtenemos los parametros
+    const { celular, tarjeta_numero, tarjeta_fecha_vencimiento, tarjeta_cvv } = req.params;
+
+    // Solicitamos el usuario correspondiente a los parmatros
+    const tarjeta = await db.query(`
+        SELECT * FROM usuario WHERE tarjeta_numero = MD5($1) 
+            AND tarjeta_fecha_vencimiento = MD5($2)
+                AND tarjeta_cvv = MD5($3)
+                    AND celular = $4
+    `, [tarjeta_numero, tarjeta_fecha_vencimiento, tarjeta_cvv, celular]);
+
+    // Enviamos el resultado 
+    res.send(tarjeta.rows[0])
+}
+
 module.exports = usuarioCtrl;

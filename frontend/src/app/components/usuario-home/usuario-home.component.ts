@@ -92,19 +92,29 @@ export class UsuarioHomeComponent {
   }
 
   solicitarServicio(){
-    
-    const servicio = {
-      celular_trabajador: this.trabajadorSeleccionado.celular,
-      id_labor: this.laborSeleccionada,
-      celular_usuario: this.usuarioService.getUsuarioActual(),
-      descripcion: this.descripcion,
-      pago: this.horasAContratar * this.trabajadorSeleccionado.precio_hora
-    }
 
-    console.log(servicio)
-    this.usuarioService.solicitarServicio(servicio).subscribe(
-      res => console.log(res), err => console.log(err)
-    );
+    this.usuarioService.verificarTarjeta(this.infoTarjeta, this.usuarioActual).subscribe(
+      res => {
+        if(res != null){
+          const servicio = {
+            celular_trabajador: this.trabajadorSeleccionado.celular,
+            id_labor: this.laborSeleccionada,
+            celular_usuario: this.usuarioService.getUsuarioActual(),
+            descripcion: this.descripcion,
+            pago: this.horasAContratar * this.trabajadorSeleccionado.precio_hora
+          }
+      
+          console.log(servicio)
+          this.usuarioService.solicitarServicio(servicio).subscribe(
+            res => console.log(res), err => console.log(err)
+          );
+        }
+        else {
+          console.log("tarjeta invalida")
+        }
+      },
+      err => console.log(err)
+    )
   }
 
   calificarSolicitud(solicitud: any){

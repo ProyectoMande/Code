@@ -59,4 +59,8 @@ export class UsuarioService {
 
     return this.http.post(`${this.URI}/calificacion_nueva`, calificacionNueva);
   }
+
+  verificarTarjeta(infoTarjeta:any, celular:string){
+    return this.http.get(`${this.URI}/info_tarjeta/${celular}/${infoTarjeta.tarjeta_numero}/${infoTarjeta.tarjeta_fecha_vencimiento}/${infoTarjeta.tarjeta_cvv}`);
+  }
 }
