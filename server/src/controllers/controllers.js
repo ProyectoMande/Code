@@ -20,7 +20,12 @@ const getCoordenadas = async (direccion) => {
     // Direccion coincidente
     const dir = candidates[0];
     
-    return dir.location;
+    try {
+      return dir.location;
+    } catch (error){
+      console.log("La dirección ingresada probablemente es inválida")
+      return;
+    }
 };
 
 const getDireccion = async (long, lat) => {
