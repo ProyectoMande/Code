@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+
+  database:
+    build: database
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+
+  server:
+    build: server
+    ports:
+      - "4000:4000"
+  
+  frontend:
+    build: frontend
+    ports:
+      - 80:80
