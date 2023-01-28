@@ -28,9 +28,9 @@ function comprobarDatos(elementos){
         $('#alertSiDetails').html('');
         $('#alertSi').show();
         //Limpiar los campos de texto
-        elementos.forEach((elemento) => {
-            elemento.value = '';
-        })
+        //elementos.forEach((elemento) => {
+            //elemento.value = '';
+        //})
 
     } else {
         $('#alertNoDetails').html('');
