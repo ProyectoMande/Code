@@ -21,8 +21,8 @@ usuarioCtrl.addUsuario = async (req, res) => {
      //Comprobamos si las coordenadas se encuentran definidas o no
      if (coordenadas){
          //Se guardan las coordenadas en sus respectivas variables
-         const gps_latitud = coordenadas.y;
-         const gps_longitud = coordenadas.x;    
+         var gps_latitud = coordenadas.y;
+         var gps_longitud = coordenadas.x;    
      } else {
          console.log("Las coordenadas no se encuentran definidas")
          return false;
@@ -71,7 +71,7 @@ usuarioCtrl.solicitarServicio = async (req, res) => {
         VALUES ($1, $2, $3, $4, $5) RETURNING *
     `, [celular_trabajador, id_labor, celular_usuario, descripcion, pago]);
 
-    // mostramos la solicutud b¿nueva
+    // mostramos la solicutud nueva
     console.log(solicitud.rows[0]);
 
 }
