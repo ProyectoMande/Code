@@ -10,7 +10,7 @@ export class TrabajadorHomeComponent {
 
   constructor(private employeeService: EmployeeService){}
 
-  trabajadorActual: string; // celular del trabajdor
+  trabajadorActual: any;
 
   solicitud = {
     direccion: 'Solictud',
@@ -20,7 +20,7 @@ export class TrabajadorHomeComponent {
 
   ngOnInit() {
     this.trabajadorActual = this.employeeService.getTrabajadorActual();
-    this.employeeService.getSolicitud(this.trabajadorActual).subscribe(
+    this.employeeService.getSolicitud(this.trabajadorActual.celular).subscribe(
       res => {
         if(res != null){
           this.solicitud = <any>res;

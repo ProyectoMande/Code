@@ -9,7 +9,7 @@ export class EmployeeService {
 
   URI = 'http://localhost:4000/api/trabajador'
 
-  trabajadorActual = '' // Celular trabajdor
+  trabajadorActual: any;
 
   constructor(private http: HttpClient) { }
 
@@ -44,8 +44,8 @@ export class EmployeeService {
     return this.http.get(`${this.URI}/solicitud/${celular}`);
   }
 
-  setTrabajadorActual(celular: string){
-    this.trabajadorActual = celular;
+  setTrabajadorActual(trabajador: any){
+    this.trabajadorActual = trabajador;
   }
 
   getTrabajadorActual(){
