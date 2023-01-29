@@ -34,9 +34,17 @@ trabajadorCtrl.addTrabajador = async (req, res) => {
     const labores = JSON.parse(req.body.laboresTrabajador);
     
     const coordenadas = await getCoordenadas(direccion);
-    // coordenadas
-    const gps_latitud = coordenadas.y;
-    const gps_longitud = coordenadas.x;
+
+    //Comprobamos si las coordenadas se encuentran definidas o no
+    if (coordenadas){
+        //Se guardan las coordenadas en sus respectivas variables
+        var gps_latitud = coordenadas.y;
+        var gps_longitud = coordenadas.x;
+    } else {
+        console.log("Las coordenadas no se encuentran definidas")
+        return false;
+    }
+
 
     // Insertamos el trabajador a la bd
     const newTrabajador = await db.query(`INSERT INTO trabajador 
