@@ -10,12 +10,18 @@ export class UsuarioActualizarComponent {
 
   constructor(private usuarioService: UsuarioService){}
 
+  usuarioActual: any;
+
   datosActualizados = {
     email: "",
     direccion: "",
     tarjeta_numero: "",
     tarjeta_fecha_vencimiento: "",
     tarjeta_cvv: ""
+  }
+
+  ngOnInit(){
+    this.usuarioActual = this.usuarioService.getUsuarioActual();
   }
 
   actualizarUsuario(){
