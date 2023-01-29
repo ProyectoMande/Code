@@ -17,7 +17,7 @@ export class UsuarioHomeComponent {
     private usuarioService: UsuarioService
   ){}
 
-  usuarioActual: string; // celular del usuario actual
+  usuarioActual: any;
 
   solicitudesPorCalificar: any[] = [];
 
@@ -60,7 +60,7 @@ export class UsuarioHomeComponent {
     );
     
     // Se obtienen las calificaciones pendientes
-    this.usuarioService.getCalificacionesPendientes(this.usuarioActual).subscribe(
+    this.usuarioService.getCalificacionesPendientes(this.usuarioActual.celular).subscribe(
       res => {
         this.solicitudesPorCalificar = <any[]>res;
         for(let spc of this.solicitudesPorCalificar){
@@ -75,8 +75,7 @@ export class UsuarioHomeComponent {
   trabajadores_labor(event: any){
     // Se obtienen los trabajdores disponibles
     this.laborSeleccionada = event.target.id;
-    const usuarioActual = this.usuarioService.getUsuarioActual();
-    this.employeeService.getTrabajadores_Labor(usuarioActual, this.laborSeleccionada)
+    this.employeeService.getTrabajadores_Labor(this.usuarioActual.celular, this.laborSeleccionada)
       .subscribe(
         res => { 
           this.trabajadoresDisponibles = <any[]>res
@@ -93,13 +92,13 @@ export class UsuarioHomeComponent {
 
   solicitarServicio(){
 
-    this.usuarioService.verificarTarjeta(this.infoTarjeta, this.usuarioActual).subscribe(
+    this.usuarioService.verificarTarjeta(this.infoTarjeta, this.usuarioActual.celular).subscribe(
       res => {
         if(res != null){
           const servicio = {
             celular_trabajador: this.trabajadorSeleccionado.celular,
             id_labor: this.laborSeleccionada,
-            celular_usuario: this.usuarioService.getUsuarioActual(),
+            celular_usuario: this.usuarioActual.celular,
             descripcion: this.descripcion,
             pago: this.horasAContratar * this.trabajadorSeleccionado.precio_hora
           }
@@ -118,7 +117,7 @@ export class UsuarioHomeComponent {
   }
 
   calificarSolicitud(solicitud: any){
-    this.usuarioService.addCalificacion(solicitud, this.usuarioActual).subscribe(
+    this.usuarioService.addCalificacion(solicitud, this.usuarioActual.celular).subscribe(
       res => console.log(res), err => console.log(err)
     );
 

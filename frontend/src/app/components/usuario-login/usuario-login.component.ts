@@ -24,7 +24,7 @@ export class UsuarioLoginComponent {
         }
         else {
           console.log('Usuario registrado')
-          this.usuarioService.setUsuario(this.celular)
+          this.usuarioService.setUsuario(res)
           this.router.navigate(['usuario-home'])
         }
       },

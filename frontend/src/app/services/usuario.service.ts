@@ -7,7 +7,7 @@ import { Usuario } from '../models/usuario'
 })
 export class UsuarioService {
 
-  celularUsuarioActual: string;
+  usuarioActual: any;
 
   URI = 'http://localhost:4000/api/usuario'
 
@@ -33,12 +33,12 @@ export class UsuarioService {
     return this.http.get(`${this.URI}/${celular}`);
   }
 
-  setUsuario(celular: string){
-    this.celularUsuarioActual = celular;
+  setUsuario(usuario: any){
+    this.usuarioActual = usuario;
   }
 
   getUsuarioActual(){
-    return this.celularUsuarioActual;
+    return this.usuarioActual;
   }
 
   solicitarServicio(servicio: any){
@@ -65,6 +65,6 @@ export class UsuarioService {
   }
 
   actualizarUsuario(datosActualizados:any){
-    return this.http.put(`${this.URI}/actualizar/${this.celularUsuarioActual}`, datosActualizados);
+    return this.http.put(`${this.URI}/actualizar/${this.usuarioActual.celular}`, datosActualizados);
   }
 }
