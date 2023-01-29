@@ -114,4 +114,45 @@ usuarioCtrl.verificarTarjeta = async (req, res) => {
     res.send(tarjeta.rows[0])
 }
 
+usuarioCtrl.actualizarUsuario = async (req, res) => {
+    // Obtenemos el celular del trabajdor a actualizar
+    const { celular } = req.params;
+
+    // Obtenemos los datos actualizados
+    const datosActualizados = req.body;
+
+    // Obtenemos las coordenadass de la direccion (si se cambio)
+    if(datosActualizados.direccion != ""){
+        const coordenadas = await getCoordenadas(datosActualizados.direccion);
+
+        // Se guardan las coordenadas en sus respectivas variables
+        const gps_latitud = coordenadas.y;
+        const gps_longitud = coordenadas.x;
+
+        // Se actualizan las coordenadas
+        const nuevasCoordenadas = await db.query(`
+            UPDATE usuario SET coordenada = ST_Point($1, $2) WHERE celular = $3
+        `, [gps_longitud, gps_latitud, celular]);
+    }
+
+    // Actualizamos los datos que si hallan recibido cambios
+    let nuevoDato;
+    for(const datoActualizado in datosActualizados){
+        if(datosActualizados[datoActualizado] != "" && datoActualizado != "direccion"){
+            if(datoActualizado.startsWith("tarjeta")){
+                nuevoDato = await db.query(`
+                    UPDATE usuario SET ${datoActualizado} = MD5($1) WHERE celular = $2 RETURNING *
+                `, [datosActualizados[datoActualizado], celular]);
+            } else {
+                nuevoDato = await db.query(`
+                    UPDATE usuario SET ${datoActualizado} = $1 WHERE celular = $2 RETURNING *
+                `, [datosActualizados[datoActualizado], celular]);
+            }
+        }
+    }
+    if(nuevoDato != null){
+        console.log("Usuario Actualizado = ", nuevoDato.rows[0])
+    }
+}
+
 module.exports = usuarioCtrl;

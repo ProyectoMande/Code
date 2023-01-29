@@ -14,17 +14,44 @@
                     <!-- Nuevo Email -->
                     <div class="form-group">
                         <label for="inputEmail" class="form-label mt-4">Email</label>
-                        <input type="email" class="form-control" placeholder="Nuevo Email">
+                        <input type="email" class="form-control" placeholder="Nuevo Email" name="email" [(ngModel)]="datosActualizados.email">
                     </div>
 
                     <!-- Nueva Dirección -->
                     <div class="form-group">
                         <label for="inputDireccion" class="form-label mt-4">Dirección</label>
-                        <input type="text" class="form-control" name="direccion" placeholder="Nueva Dirección de Residencia">
+                        <input type="text" class="form-control" name="direccion" placeholder="Nueva Dirección de Residencia" name="direccion" [(ngModel)]="datosActualizados.direccion">
                         <small  class="form-text text-muted">Ejemplo: cll 55 41 d 33</small>
                     </div>
 
-                    <p>FALTAN MAS CAMPOS</p>
+                    <!--Tarjeta numero-->
+                  <div class="form-group">
+                    <label class="form-label mt-4">Numero de Tarjeta(credito/debito)</label>
+                    <input type="text" class="form-control" placeholder="Nuevo Numero" name="tarjeta_numero" [(ngModel)]="datosActualizados.tarjeta_numero">
+                  </div>
+
+                  <!--Tarjeta fecha vencimiento-->
+                  <div class="form-group">
+                    <label for="inputId" class="form-label mt-4">Fecha Vencimiento</label>
+                    <input type="date" class="form-control" placeholder="Nueva Fecha Vencimiento" name="tarjeta_fecha_vencimiento" [(ngModel)]="datosActualizados.tarjeta_fecha_vencimiento">
+                  </div>
+
+                  <!--Tarjeta cvv-->
+                  <div class="form-group">
+                    <label for="inputId" class="form-label mt-4">CVV</label>
+                    <input type="text" class="form-control" placeholder="Nuevo CVV" name="tarjeta_cvv" [(ngModel)]="datosActualizados.tarjeta_cvv">
+                  </div>
+
+                  <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                    <div class="card-body">
+                      <p class="card-text">Solo se cambiaran los datos llenados</p>
+                    </div>
+                  </div>
+
+                  <!--Botón Actuazlizar-->
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-lg btn-primary" type="button" (click)="actualizarUsuario()">Actualizar</button>
+                  </div>
 
                 </fieldset>
             </form>

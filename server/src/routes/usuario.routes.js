@@ -29,4 +29,7 @@ router.post('/calificacion_nueva', usuarioCtrl.addCalificacion);
 // VErficar tarjeta
 router.get('/info_tarjeta/:celular/:tarjeta_numero/:tarjeta_fecha_vencimiento/:tarjeta_cvv', usuarioCtrl.verificarTarjeta);
 
+// Actualizar usuario
+router.put('/actualizar/:celular', usuarioCtrl.actualizarUsuario);
+
 module.exports = router;

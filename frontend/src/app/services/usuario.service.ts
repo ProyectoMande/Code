@@ -63,4 +63,8 @@ export class UsuarioService {
   verificarTarjeta(infoTarjeta:any, celular:string){
     return this.http.get(`${this.URI}/info_tarjeta/${celular}/${infoTarjeta.tarjeta_numero}/${infoTarjeta.tarjeta_fecha_vencimiento}/${infoTarjeta.tarjeta_cvv}`);
   }
+
+  actualizarUsuario(datosActualizados:any){
+    return this.http.put(`${this.URI}/actualizar/${this.celularUsuarioActual}`, datosActualizados);
+  }
 }
