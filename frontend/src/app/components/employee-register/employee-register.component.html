@@ -37,7 +37,7 @@
               <!--Dirección-->
               <div class="form-group">
                 <label for="inputDireccion" class="form-label mt-4">Dirección</label>
-                <input type="text" class="form-control" name="direccion" placeholder="Dirección de Residencia" [(ngModel)]="nuevoTrabajador.direccion" onClick="normalBorder(this)">
+                <input type="text" class="form-control" name="direccion" placeholder="Dirección de Residencia" [(ngModel)]="nuevoTrabajador.direccion" onClick="normalBorder(this)" onKeyUp="comprobarDireccion(this)">
                 <small id="direccionHelp" class="form-text text-muted">Ejemplo: cll 55 41 d 33</small>
               </div>
               
