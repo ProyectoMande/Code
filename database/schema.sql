@@ -91,7 +91,8 @@ CREATE VIEW labores_disponibles AS
 SELECT id_labor, n_labor FROM (SELECT nombre AS n_labor, id AS id_labor FROM labor  
         INNER JOIN trabajador_labor
             ON labor.id = trabajador_labor.id_labor) AS Labores
-                INNER JOIN trabajador ON trabajador.estado = 'disponible';
+                INNER JOIN trabajador ON trabajador.estado = 'disponible'
+                    GROUP BY id_labor, n_labor;
 
 -- Calidicacion promedio de cada trabajdor
 CREATE VIEW calificacion_promedio_trabajador AS
