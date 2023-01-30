@@ -62,9 +62,11 @@ export class TrabajadorHomeComponent {
             const laboresTrabajador = <any[]>res;
             for(let labor of this.labores){
               labor.checked = false;
+              labor.esNueva = true;
               for(let laborTrabajador of laboresTrabajador){
                 if(laborTrabajador.nombre == labor.nombre){
                   labor.checked = true;
+                  labor.esNueva = false;
                   labor.precio_hora = laborTrabajador.precio_hora;
                   break;
                 }
@@ -101,6 +103,12 @@ export class TrabajadorHomeComponent {
       reader.onload = e => this.previewNuevaFotoPerfil = reader.result;
       reader.readAsDataURL(this.nuevaFotoPerfil);
     }
+  }
+
+  actualizarTrabajador(){
+    this.employeeService.actualizarTrabajador(this.datosActualizar, this.nuevaFotoPerfil, this.labores).subscribe(
+      res => console.log(res), err => console.log(err)
+    )
   }
 
 }

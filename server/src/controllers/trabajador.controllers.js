@@ -124,4 +124,63 @@ trabajadorCtrl.getLabores = async (req, res) => {
     res.send(labores.rows);
 }
 
+trabajadorCtrl.actualizarTrabajador = async (req, res) => {
+    // Celular del trabajador
+    const { celular } = req.params;
+
+    // Datos nuevos
+    const { email, direccion } = req.body;
+    const labores = JSON.parse(req.body.laboresTrabajador);
+    
+    //Actualizamos los datos
+    if(direccion != ""){
+        const coordenadas = await getCoordenadas(direccion);
+
+        //Comprobamos si las coordenadas se encuentran definidas o no
+        if (coordenadas){
+            //Se guardan las coordenadas en sus respectivas variables
+            var gps_latitud = coordenadas.y;
+            var gps_longitud = coordenadas.x;
+
+            const coordenadaNueva = db.query(`
+                UPDATE trabajador SET coordenada = ST_Point($1, $2) WHERE celular = $3
+            `, [gps_longitud, gps_latitud, celular]);
+        } else {
+            console.log("Las coordenadas no se encuentran definidas")
+            return false;
+        }
+    }
+
+    if(email != ""){
+        const emailNuevo = db.query(`
+            UPDATE trabajador SET email = $1 WHERE celular = $2
+        `, [email, celular]);
+    }
+
+    for(let labor of labores){
+        const { id, precio_hora } = labor;
+        if(labor.checked){
+            if(labor.esNueva){
+                const nuevaLabor = await db.query(`
+                INSERT INTO trabajador_labor
+                    (celular_trabajador, id_labor, precio_hora)
+                        VALUES ($1, $2, $3)
+                `, [celular, id, precio_hora]);
+            } else {
+                const laborActualizada = await db.query(`
+                    UPDATE trabajador_labor SET precio_hora = $1 
+                        WHERE id_labor = $2 AND celular_trabajador = $3
+                `, [precio_hora, id, celular]);
+            }
+        } else {
+            if(!labor.esNueva){
+                const laborEliminada = await db.query(`
+                    DELETE FROM trabajador_labor 
+                        WHERE id_labor = $1 AND celular_trabajador = $2
+                `, [id, celular]);
+            }
+        }
+    }
+}
+
 module.exports = trabajadorCtrl;

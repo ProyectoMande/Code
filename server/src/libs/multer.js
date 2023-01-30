@@ -5,7 +5,9 @@ const path = require('path');
 const storage = multer.diskStorage({
     destination: path.join(__dirname, '../public/uploads'),
     filename: (req, file, cb) => {
-        const { celular } = req.body;
+        let { celular } = req.body || req.params;
+        if(celular==null){celular = req.params.celular}
+        console.log(celular)
         cb(null, `${celular}${file.fieldname}.jpg`);
     }
 });

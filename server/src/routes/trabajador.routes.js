@@ -41,6 +41,9 @@ router.put('/solicitud_terminada/:id_solicitud', trabajadorCtrl.solicitudTermina
 // Obtener las labores de un trabajador
 router.get('/labores/:celular', trabajadorCtrl.getLabores);
 
+// Actualizar trabajador
+router.put('/actualizar/:celular',multerTrabajador ,trabajadorCtrl.actualizarTrabajador);
+
 // Se exporta el objeto router
 // Es decir, cuando se importe este archivo, se importara dicho objeto
 module.exports = router;

@@ -59,4 +59,16 @@ export class EmployeeService {
   getLabores(celular: string){
     return this.http.get(`${this.URI}/labores/${celular}`);
   }
+
+  actualizarTrabajador(nuevosDatos: any, fotoPerfil: File, laboresTrabajador: any[]) {
+    const fd = new FormData();
+    fd.append('email', nuevosDatos.email);
+    fd.append('direccion', nuevosDatos.direccion);
+    fd.append('fotoPerfil', fotoPerfil);
+    fd.append('celular', this.trabajadorActual.celular);
+
+    fd.append('laboresTrabajador', JSON.stringify(laboresTrabajador));
+
+    return this.http.put(`${this.URI}/actualizar/${this.trabajadorActual.celular}`, fd);
+  }
 }
