@@ -54,7 +54,7 @@
           <!-- Nueva Dirección -->
           <div class="form-group">
             <label for="inputDireccion" class="form-label mt-4">Dirección</label>
-            <input type="text" class="form-control" placeholder="Nueva Dirección de Residencia" name="direccion" [(ngModel)]="datosActualizar.direccion">
+            <input type="text" class="form-control" placeholder="Nueva Dirección de Residencia" name="direccion" [(ngModel)]="datosActualizar.direccion" onKeyUp="comprobarDireccion(this)">
             <small  class="form-text text-muted">Ejemplo: cll 55 41 d 33</small>
           </div>
 

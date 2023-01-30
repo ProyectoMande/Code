@@ -121,13 +121,19 @@ usuarioCtrl.actualizarUsuario = async (req, res) => {
     // Obtenemos los datos actualizados
     const datosActualizados = req.body;
 
-    // Obtenemos las coordenadass de la direccion (si se cambio)
+    // Obtenemos las coordenadas de la direccion (si se cambio)
     if(datosActualizados.direccion != ""){
         const coordenadas = await getCoordenadas(datosActualizados.direccion);
 
-        // Se guardan las coordenadas en sus respectivas variables
-        const gps_latitud = coordenadas.y;
-        const gps_longitud = coordenadas.x;
+        //Comprobamos si las coordenadas se encuentran definidas o no
+        if (coordenadas){
+            // Se guardan las coordenadas en sus respectivas variables
+            var gps_latitud = coordenadas.y;
+            var gps_longitud = coordenadas.x;
+        } else {
+            console.log("Las coordenadas no se encuentran definidas")
+            return false;
+        }
 
         // Se actualizan las coordenadas
         const nuevasCoordenadas = await db.query(`
