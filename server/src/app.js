@@ -2,6 +2,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require("cors");
+const path = require('path')
 
 const app = express();
 
@@ -25,6 +26,9 @@ app.use('/api/usuario', require('./routes/usuario.routes'));
 
 // Rutas de labor
 app.use('/api/labor', require('./routes/labor.routes'));
+
+// Carpeta para las imagenes publicas (foto perfil, foto id , ...)
+app.use('/api/images', express.static(path.resolve('src/public/uploads')));
  
 
 //exportamos el archivo
