@@ -37,7 +37,7 @@
                   <!--Dirección-->
                   <div class="form-group">
                     <label for="inputDireccion" class="form-label mt-4">Dirección</label>
-                    <input type="text" class="form-control" name="direccion" placeholder="Dirección de Residencia" [(ngModel)]="usuarioNuevo.direccion" onClick="normalBorder(this)">
+                    <input type="text" class="form-control" name="direccion" placeholder="Dirección de Residencia" [(ngModel)]="usuarioNuevo.direccion" onKeyPress="comprobarDireccion(this)">
                     <small id="direccionHelp" class="form-text text-muted">Ejemplo: cll 55 41 d 33</small>
                   </div>
 
@@ -75,7 +75,7 @@
                   <!--Alerta No-->
                   <div id = "alertNo" class="alert alert-dismissible alert-danger" role="alert">
                     <button id="cerrarAlertNo" type="button" class="btn-close" onClick = "cerrarAlerta('alertNo')"></button>
-                    <strong>¡Ops!</strong> Los datos se encuentran incompletos. Por favor revisa de nuevo.
+                    <strong>¡Ops!</strong> Los datos se encuentran incompletos o no se encuentran bien. Por favor revisa de nuevo.
                     <div id="alertNoDetails"></div>
                   </div>
                   
