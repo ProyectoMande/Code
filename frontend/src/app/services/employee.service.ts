@@ -56,7 +56,7 @@ export class EmployeeService {
     return this.http.put(`${this.URI}/solicitud_terminada/${id_solicitud}`, "");
   }
 
-  getURI(){
-    return this.URI;
+  getLabores(celular: string){
+    return this.http.get(`${this.URI}/labores/${celular}`);
   }
 }

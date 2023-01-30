@@ -109,4 +109,19 @@ trabajadorCtrl.solicitudTerminada = async (req, res) => {
     console.log(solicitud_terminada.rows[0]);
 }
 
+trabajadorCtrl.getLabores = async (req, res) => {
+    // Celular del trabajdor
+    const { celular } = req.params;
+
+    // Obtenemos las labores del trabajador
+    const labores = await db.query(`
+        SELECT id_labor, precio_hora, nombre FROM trabajador_labor
+            INNER JOIN labor ON labor.id = trabajador_labor.id_labor
+                WHERE celular_trabajador = $1
+    `, [celular]);
+
+    // Enviamos las labores
+    res.send(labores.rows);
+}
+
 module.exports = trabajadorCtrl;

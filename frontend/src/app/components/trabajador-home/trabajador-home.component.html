@@ -39,21 +39,48 @@
 
           <!-- Foto de Perfil -->
           <div class="container">
-            <img [src]="fotoPerfil || ''" alt="No image" class="img-fluid">
+            <img [src]="previewNuevaFotoPerfil || fotoPerfil" alt="No image" class="img-fluid">
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="file" (change)="onFotoPerfilSelected($event)">
           </div>
 
           <!-- Nuevo Email -->
           <div class="form-group">
             <label for="inputEmail" class="form-label mt-4">Email</label>
-            <input type="email" class="form-control" placeholder="Nuevo Email">
+            <input type="email" class="form-control" placeholder="Nuevo Email" name="email" [(ngModel)]="datosActualizar.email">
           </div>
 
           <!-- Nueva Dirección -->
           <div class="form-group">
             <label for="inputDireccion" class="form-label mt-4">Dirección</label>
-            <input type="text" class="form-control" placeholder="Nueva Dirección de Residencia">
+            <input type="text" class="form-control" placeholder="Nueva Dirección de Residencia" name="direccion" [(ngModel)]="datosActualizar.direccion">
             <small  class="form-text text-muted">Ejemplo: cll 55 41 d 33</small>
           </div>
+
+          <!--Labores desempeñadas-->
+          <div class="form-group">
+            <label class="form-label mt-4">Seleccione las labores que desea añadir o eliminar:</label>
+            <div class="form-group">
+              <!--Checkbox de las labores-->
+              <span *ngFor="let labor of labores">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" value='{{ labor.nombre }}' name="checked" [(ngModel)]="labor.checked">
+                  <label class="form-check-label" for="inlineCheckbox1">{{ labor.nombre }}</label>
+                </div>
+              </span>
+              <!--Precio de las labores-->
+              <span *ngFor="let labor of labores">
+                <div class="form-group" *ngIf="(labor.checked)">
+                  <label class="form-label mt-4">{{ "precio_hora " + labor.nombre }}</label>
+                  <input type="number" class="form-control" name="precio_hora" placeholder="$$$" [(ngModel)]="labor.precio_hora">
+                </div>
+              </span>
+            </div>
+          </div>
+
+          <!--Botón Enviar-->
+          <button type="submit" class="btn btn-primary">Actualizar</button>
 
         </div>
         <div class="col-sm">
