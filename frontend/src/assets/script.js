@@ -62,10 +62,14 @@ function comprobarDatos(elementos){
     var esCorrecto = patternDireccion.test(elemento.value)
 
     if (esCorrecto){
-        elemento.classList.toggle('borderNormal')    
+        if (!elemento.classList.contains('borderNormal')){
+            elemento.classList.remove('borderError')
+            elemento.classList.toggle('borderNormal')    
+        }
     } else {
         //Si el elemento ya contiene el estilo de borde Rojo, pues para que se lo va cambiar ome?
         if (!elemento.classList.contains('borderError')){
+            elemento.classList.remove('borderNormal')
             elemento.classList.toggle('borderError');
         }       
     }
