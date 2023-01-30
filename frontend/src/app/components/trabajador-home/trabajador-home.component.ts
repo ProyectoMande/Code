@@ -56,27 +56,26 @@ export class TrabajadorHomeComponent {
     this.laborService.getLabores().subscribe(
       res => {
         this.labores = <any[]>res;
+        // Se obtienen las labores del trabajador
+        this.employeeService.getLabores(this.trabajadorActual.celular).subscribe(
+          res => {
+            const laboresTrabajador = <any[]>res;
+            for(let labor of this.labores){
+              labor.checked = false;
+              for(let laborTrabajador of laboresTrabajador){
+                if(laborTrabajador.nombre == labor.nombre){
+                  labor.checked = true;
+                  labor.precio_hora = laborTrabajador.precio_hora;
+                  break;
+                }
+              }
+            }
+          },
+          err => console.log(err)
+        )
       },
       err => console.log(err)
     );
-
-    // Se obtienen las labores del trabajador
-    this.employeeService.getLabores(this.trabajadorActual.celular).subscribe(
-      res => {
-        const laboresTrabajador = <any[]>res;
-        for(let labor of this.labores){
-          labor.checked = false;
-          for(let laborTrabajador of laboresTrabajador){
-            if(laborTrabajador.nombre == labor.nombre){
-              labor.checked = true;
-              labor.precio_hora = laborTrabajador.precio_hora;
-              break;
-            }
-          }
-        }
-      },
-      err => console.log(err)
-    )
   }
 
   laborRealizada(){
