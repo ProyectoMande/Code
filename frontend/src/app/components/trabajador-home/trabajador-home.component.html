@@ -28,8 +28,37 @@
 
       </div>
     </div>
-    <div class="col-8" style="background-color:#bbb;">
-      <h2>Column 2</h2>
-      <p>Some text..</p>
+    <div class="col">
+      <div class="row">
+        <div class="col-sm">
+          <!--One of three columns-->
+        </div>
+        <div class="col-sm">
+          <legend align="center">Nombre Trabajador</legend>
+          <legend align="center">Celular</legend>
+
+          <!-- Foto de Perfil -->
+          <div class="container">
+            <img [src]="fotoPerfil || ''" alt="No image" class="img-fluid">
+          </div>
+
+          <!-- Nuevo Email -->
+          <div class="form-group">
+            <label for="inputEmail" class="form-label mt-4">Email</label>
+            <input type="email" class="form-control" placeholder="Nuevo Email">
+          </div>
+
+          <!-- Nueva Dirección -->
+          <div class="form-group">
+            <label for="inputDireccion" class="form-label mt-4">Dirección</label>
+            <input type="text" class="form-control" placeholder="Nueva Dirección de Residencia">
+            <small  class="form-text text-muted">Ejemplo: cll 55 41 d 33</small>
+          </div>
+
+        </div>
+        <div class="col-sm">
+          <!--One of three columns-->
+        </div>
+      </div>
     </div>
   </div>

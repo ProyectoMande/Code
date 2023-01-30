@@ -55,4 +55,8 @@ export class EmployeeService {
   solicitudRealizada(id_solicitud: number){
     return this.http.put(`${this.URI}/solicitud_terminada/${id_solicitud}`, "");
   }
+
+  getURI(){
+    return this.URI;
+  }
 }

@@ -18,8 +18,11 @@ export class TrabajadorHomeComponent {
     labor_name: 'No hay'
   }
 
+  fotoPerfil: any;
+
   ngOnInit() {
     this.trabajadorActual = this.employeeService.getTrabajadorActual();
+    this.fotoPerfil = `http://localhost:4000/api/images/${this.trabajadorActual.foto_perfil}`;
     this.employeeService.getSolicitud(this.trabajadorActual.celular).subscribe(
       res => {
         if(res != null){
