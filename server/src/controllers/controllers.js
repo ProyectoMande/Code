@@ -21,6 +21,7 @@ const getCoordenadas = async (direccion) => {
     const geo = await geocode({
         address: direccion,
         countryCode: "CO",
+        city: "Cali",
         authentication,
       }).then((res) => {
         candidates = res.candidates;
