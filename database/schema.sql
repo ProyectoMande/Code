@@ -117,9 +117,9 @@ BEGIN
                             RIGHT JOIN trabajador
                                 ON trabajador.celular = calificacion_promedio_trabajador.celular_trabajador
                                     AND trabajador.estado = 'disponible') AS info_trabajador
-                                        NATURAL JOIN 
-                                            (SELECT precio_hora FROM trabajador_labor
-                                                WHERE id_labor = labor_id) AS precios_hora) AS t_info
+                                        INNER JOIN 
+                                            (SELECT precio_hora, celular_trabajador FROM trabajador_labor
+                                                WHERE id_labor = labor_id) AS precios_hora ON info_trabajador.celular = precios_hora.celular_trabajador) AS t_info
                                                     INNER JOIN (SELECT coordenada AS coor_u FROM usuario 
                                                             WHERE celular = celular_u) AS usuario_info ON true
                                                                 ORDER BY precio_hora, promedio_calificacion, distancia
