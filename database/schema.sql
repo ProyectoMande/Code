@@ -182,6 +182,30 @@ LANGUAGE plpgsql;
 -- select * from solicitud_trabajador('3012289097') as
 -- (long double precision, lat double precision, labor_name varchar, id_solicitud integer);
 
+-- Funcion que retorna las calificaciones pendientes de un usuario
+CREATE OR REPLACE FUNCTION calificaciones_pendientes(usuario_celular VARCHAR)
+RETURNS SETOF "record" AS
+$$
+DECLARE r record;
+BEGIN
+    FOR r IN SELECT nombreCompleto AS nombre_trabajador, nombre AS labor_name, id AS solicitud_id FROM (
+            SELECT nombreCompleto, nombre, join_labor.id FROM (
+                SELECT solicitud.id, nombre, celular_trabajador FROM solicitud
+                    INNER JOIN labor ON labor.id = solicitud.id_labor 
+                        AND solicitud.finalizada = TRUE AND solicitud.celular_usuario = usuario_celular
+            ) AS join_labor 
+                INNER JOIN trabajador ON trabajador.celular = join_labor.celular_trabajador
+        ) AS join_trabajador
+            LEFT JOIN calificacion ON join_trabajador.id = calificacion.id_solicitud
+                WHERE calificacion  IS NULL
+        LOOP
+            RETURN NEXT r;
+        END LOOP;
+    RETURN;
+END;
+$$
+LANGUAGE plpgsql;
+
 -- ############# TRIGGERS ################ --
 
 -- Trigger que ejecuta la funcion solicitud_insert_trigger()
