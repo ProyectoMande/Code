@@ -2,11 +2,11 @@
 
 -- Tabla trabajador
 CREATE TABLE trabajador(
-    celular VARCHAR(20) PRIMARY KEY,
-    nombreCompleto VARCHAR(20) NOT NULL,
-    id VARCHAR(20),
-    email VARCHAR(20),
-    estado VARCHAR(20),
+    celular VARCHAR(100) PRIMARY KEY,
+    nombreCompleto VARCHAR(100) NOT NULL,
+    id VARCHAR(100),
+    email VARCHAR(100),
+    estado VARCHAR(100),
     -- gps_latitud DOUBLE PRECISION NOT NULL,
     -- gps_longitud DOUBLE PRECISION NOT NULL,
     coordenada GEOMETRY NOT NULL,
@@ -16,10 +16,10 @@ CREATE TABLE trabajador(
 
 -- Tabla usuario
 CREATE TABLE usuario(
-    celular VARCHAR(20) PRIMARY KEY,
-    nombreCompleto VARCHAR(20) NOT NULL,
-    id VARCHAR(20),
-    email VARCHAR(20),
+    celular VARCHAR(100) PRIMARY KEY,
+    nombreCompleto VARCHAR(100) NOT NULL,
+    id VARCHAR(100),
+    email VARCHAR(100),
     -- gps_latitud DOUBLE PRECISION NOT NULL,
     -- gps_longitud DOUBLE PRECISION NOT NULL,
     coordenada GEOMETRY NOT NULL,
@@ -31,12 +31,12 @@ CREATE TABLE usuario(
 -- Tabla labor
 CREATE TABLE labor(
     id SERIAL PRIMARY KEY,
-    nombre VARCHAR(20)
+    nombre VARCHAR(100)
 );
 
 -- Tabla trabajdor_labor
 CREATE TABLE trabajador_labor(
-    celular_trabajador VARCHAR(20) NOT NULL,
+    celular_trabajador VARCHAR(100) NOT NULL,
     id_labor INTEGER,
     precio_hora INTEGER,
     PRIMARY KEY(celular_trabajador, id_labor),
@@ -49,11 +49,11 @@ CREATE TABLE trabajador_labor(
 -- Tabla solicitud
 CREATE TABLE solicitud(
     id SERIAL PRIMARY KEY,
-    celular_trabajador VARCHAR(20) NOT NULL,
+    celular_trabajador VARCHAR(100) NOT NULL,
     -- Nuevo atributo
     id_labor INTEGER NOT NULL,
-    celular_usuario VARCHAR(20) NOT NULL,
-    descripcion VARCHAR(200),
+    celular_usuario VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(500),
     pago DOUBLE PRECISION NOT NULL,
     -- Nuevo atributo
     finalizada BOOLEAN DEFAULT FALSE,
@@ -67,7 +67,7 @@ CREATE TABLE solicitud(
 
 -- Tabla calificacion
 CREATE TABLE calificacion(
-    celular_usuario VARCHAR(20) NOT NULL,
+    celular_usuario VARCHAR(100) NOT NULL,
     id_solicitud INTEGER NOT NULL,
     calificacion INTEGER NOT NULL,
     PRIMARY KEY(celular_usuario, id_solicitud),
