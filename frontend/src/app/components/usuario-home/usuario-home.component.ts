@@ -105,7 +105,18 @@ export class UsuarioHomeComponent {
       
           console.log(servicio)
           this.usuarioService.solicitarServicio(servicio).subscribe(
-            res => console.log(res), err => console.log(err)
+            res => {
+              console.log(res)
+              this.trabajadoresDisponibles = this.trabajadoresDisponibles.filter(trabajador => trabajador.celular != this.trabajadorSeleccionado.celular)
+              this.trabajadorSeleccionado = {
+                celular: '', 
+                nombrecompleto: 'Seleccione un Trabajador', 
+                promedio_calificacion: '', 
+                precio_hora: 0, 
+                distancia: 0
+              }
+            }, 
+            err => console.log(err)
           );
         }
         else {

@@ -112,17 +112,18 @@ DECLARE r record;
 BEGIN
     FOR r IN SELECT celular, nombreCompleto, COALESCE(promedio_calificacion, 0.0), precio_hora, ST_DistanceSphere(coor_t,coor_u) AS distancia FROM
         (SELECT celular, nombreCompleto, promedio_calificacion, coor_t, precio_hora FROM
-            (SELECT celular, nombreCompleto, promedio_calificacion, coordenada AS coor_t 
+            (SELECT celular, nombreCompleto, promedio_calificacion, coordenada AS coor_t, estado 
                 FROM calificacion_promedio_trabajador
                             RIGHT JOIN trabajador
-                                ON trabajador.celular = calificacion_promedio_trabajador.celular_trabajador
-                                    AND trabajador.estado = 'disponible') AS info_trabajador
-                                        INNER JOIN 
-                                            (SELECT precio_hora, celular_trabajador FROM trabajador_labor
-                                                WHERE id_labor = labor_id) AS precios_hora ON info_trabajador.celular = precios_hora.celular_trabajador) AS t_info
-                                                    INNER JOIN (SELECT coordenada AS coor_u FROM usuario 
-                                                            WHERE celular = celular_u) AS usuario_info ON true
-                                                                ORDER BY precio_hora, promedio_calificacion, distancia
+                                ON trabajador.celular = calificacion_promedio_trabajador.celular_trabajador) AS info_trabajador
+                                    INNER JOIN 
+                                        (SELECT precio_hora, celular_trabajador FROM trabajador_labor
+                                            WHERE id_labor = labor_id) AS precios_hora 
+                                                ON info_trabajador.celular = precios_hora.celular_trabajador
+                                                    WHERE estado = 'disponible') AS t_info
+                                                        INNER JOIN (SELECT coordenada AS coor_u FROM usuario 
+                                                                WHERE celular = celular_u) AS usuario_info ON true
+                                                                    ORDER BY precio_hora, promedio_calificacion, distancia
         LOOP
             RETURN NEXT r;
         END LOOP;

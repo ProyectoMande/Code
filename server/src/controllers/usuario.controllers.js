@@ -74,6 +74,8 @@ usuarioCtrl.solicitarServicio = async (req, res) => {
     // mostramos la solicutud nueva
     console.log(solicitud.rows[0]);
 
+    res.send({status: true});
+
 }
 
 usuarioCtrl.getCalificacionesPendientes = async (req, res) => {
