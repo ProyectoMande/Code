@@ -11,6 +11,12 @@ import { UsuarioService } from '../../services/usuario.service'
 })
 export class UsuarioHomeComponent {
 
+  // ALerta satisfactoria
+  alertaPagado = false
+
+  // Alerta erronea
+  alertaNoPagado = false
+
   constructor(
     private laborService: LaborService,
     private employeeService: EmployeeService,
@@ -115,12 +121,14 @@ export class UsuarioHomeComponent {
                 precio_hora: 0, 
                 distancia: 0
               }
+              this.alertaPagado = true
             }, 
             err => console.log(err)
           );
         }
         else {
           console.log("tarjeta invalida")
+          this.alertaNoPagado = true
         }
       },
       err => console.log(err)

@@ -135,6 +135,14 @@
                 <div class="d-grid">
 
                   <button class="btn btn-lg btn-primary" type="button" (click)="solicitarServicio()">Pagar</button>
+                  <div class="alert alert-dismissible alert-success" *ngIf="alertaPagado">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="alertaPagado=false"></button>
+                    <strong>Pagado!</strong>
+                  </div>
+                  <div class="alert alert-dismissible alert-danger" *ngIf="alertaNoPagado">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="alertaNoPagado=false"></button>
+                    <strong>Datos Invalidos!</strong>
+                  </div>
                   
                 </div>
               </div>
