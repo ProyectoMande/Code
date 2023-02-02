@@ -42,15 +42,15 @@
                   <tr>
                     <th scope="col">Nombre del Trabajador</th>
                     <th scope="col">Numero de Estrellas</th>
-                    <th scope="col">Distancia</th>
+                    <th scope="col">Distancia (mts)</th>
                     <th scope="col">Precio/Hora</th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let trabajador of trabajadoresDisponibles">
                     <tr class="table-primary" id="{{ trabajador.celular }}" (click)="setTrabajadorSeleccionado(trabajador)">
                         <td>{{ trabajador.nombrecompleto }}</td>
-                        <td>{{ trabajador.promedio_calificacion }}</td>
-                        <td>{{ trabajador.distancia }}</td>
+                        <td>{{ formatearNumero(trabajador.promedio_calificacion) }}</td>
+                        <td>{{ formatearNumero(trabajador.distancia) }}</td>
                         <td>{{ trabajador.precio_hora }}</td>
                     </tr>
                 </tbody>

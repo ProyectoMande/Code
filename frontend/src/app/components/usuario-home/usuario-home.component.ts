@@ -91,6 +91,10 @@ export class UsuarioHomeComponent {
       );
   }
 
+  formatearNumero(numero: number){
+    return Math.round(numero)
+  }
+
   setTrabajadorSeleccionado(trabajador: any){
     this.trabajadorSeleccionado = trabajador;
     console.log(this.trabajadorSeleccionado);
