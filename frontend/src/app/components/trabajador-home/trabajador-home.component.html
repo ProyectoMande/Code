@@ -82,6 +82,11 @@
           <!--Botón Enviar-->
           <button type="submit" class="btn btn-primary" (click)="actualizarTrabajador()">Actualizar</button>
 
+          <div class="alert alert-dismissible alert-success" *ngIf="alertaActualizado">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="alertaActualizado=false"></button>
+            <strong>Campos actualizados</strong>
+          </div>
+          
         </div>
         <div class="col-sm">
           <!--One of three columns-->

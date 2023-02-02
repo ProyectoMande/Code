@@ -9,6 +9,8 @@ import { LaborService } from '../../services/labor.service'
 })
 export class TrabajadorHomeComponent {
 
+  alertaActualizado = false;
+
   constructor(
     private employeeService: EmployeeService,
     private laborService: LaborService
@@ -109,6 +111,7 @@ export class TrabajadorHomeComponent {
     this.employeeService.actualizarTrabajador(this.datosActualizar, this.nuevaFotoPerfil, this.labores).subscribe(
       res => console.log(res), err => console.log(err)
     )
+    this.alertaActualizado = true
   }
 
 }
