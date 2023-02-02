@@ -12,6 +12,8 @@ export class UsuarioActualizarComponent {
 
   usuarioActual: any;
 
+  alertaActualizar = false
+
   datosActualizados = {
     email: "",
     direccion: "",
@@ -26,7 +28,18 @@ export class UsuarioActualizarComponent {
 
   actualizarUsuario(){
     this.usuarioService.actualizarUsuario(this.datosActualizados).subscribe(
-      res => console.log(res), err => console.log(err)
+      res => {
+        console.log(res)
+        this.datosActualizados = {
+          email: "",
+          direccion: "",
+          tarjeta_numero: "",
+          tarjeta_fecha_vencimiento: "",
+          tarjeta_cvv: ""
+        }
+        this.alertaActualizar = true
+      }, 
+      err => console.log(err)
     )
   }
 

@@ -15,6 +15,7 @@ import { NavbarTrabajadorHomeComponent } from './components/navbar-trabajador-ho
 import { UsuarioHomeComponent } from './components/usuario-home/usuario-home.component';
 import { UsuarioLoginComponent } from './components/usuario-login/usuario-login.component';
 import { UsuarioActualizarComponent } from './components/usuario-actualizar/usuario-actualizar.component';
+import { NavbarUsuarioHomeComponent } from './components/navbar-usuario-home/navbar-usuario-home.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { UsuarioActualizarComponent } from './components/usuario-actualizar/usua
     NavbarTrabajadorHomeComponent,
     UsuarioHomeComponent,
     UsuarioLoginComponent,
-    UsuarioActualizarComponent
+    UsuarioActualizarComponent,
+    NavbarUsuarioHomeComponent
   ],
   imports: [
     BrowserModule,

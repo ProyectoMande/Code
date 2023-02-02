@@ -1,4 +1,4 @@
-<app-navbar-trabajador-home></app-navbar-trabajador-home>
+<app-navbar-usuario-home></app-navbar-usuario-home>
 
 <div class="container">
     <div class="row">
@@ -51,6 +51,10 @@
                   <!--Botón Actuazlizar-->
                   <div class="d-grid gap-2">
                     <button class="btn btn-lg btn-primary" type="button" (click)="actualizarUsuario()">Actualizar</button>
+                  </div>
+                  <div class="alert alert-dismissible alert-success" *ngIf="alertaActualizar">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="alertaActualizar=false"></button>
+                    <strong>Well done!</strong>
                   </div>
 
                 </fieldset>

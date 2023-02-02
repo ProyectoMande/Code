@@ -161,6 +161,8 @@ usuarioCtrl.actualizarUsuario = async (req, res) => {
     if(nuevoDato != null){
         console.log("Usuario Actualizado = ", nuevoDato.rows[0])
     }
+
+    res.send({status: true})
 }
 
 module.exports = usuarioCtrl;

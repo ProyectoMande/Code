@@ -3,11 +3,15 @@ const db = require('../database');
 const laborCtrl = {};
 
 laborCtrl.getLabores = async (req, res) => {
-    const labores = await db.query(
-        `SELECT * FROM labor`
-    );
-    
-    res.send(labores.rows);
+    try {
+        const labores = await db.query(
+            `SELECT * FROM labor`
+        );
+        
+        res.send(labores.rows);
+    } catch (error) {
+        console.log(error)
+    }
 };
 
 laborCtrl.getLaboresDisponibles = async (req, res) => {
