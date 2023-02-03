@@ -48,13 +48,13 @@
           <!-- Nuevo Email -->
           <div class="form-group">
             <label for="inputEmail" class="form-label mt-4">Email</label>
-            <input type="email" class="form-control" placeholder="Nuevo Email" name="Email" [(ngModel)]="datosActualizar.email">
+            <input type="email" class="form-control" placeholder="Nuevo Email" name="email" [(ngModel)]="datosActualizar.email">
           </div>
 
           <!-- Nueva Dirección -->
           <div class="form-group">
             <label for="inputDireccion" class="form-label mt-4">Dirección</label>
-            <input type="text" class="form-control" placeholder="Nueva Dirección de Residencia" name="Dirección" [(ngModel)]="datosActualizar.direccion" onKeyUp="comprobarDireccion(this)">
+            <input type="text" class="form-control" placeholder="Nueva Dirección de Residencia" name="direccion" [(ngModel)]="datosActualizar.direccion" onKeyUp="comprobarDireccion(this)">
             <small  class="form-text text-muted">Ejemplo: cll 55 41 d 33</small>
           </div>
 
