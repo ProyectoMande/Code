@@ -1,5 +1,7 @@
 # Despliegue
 - Para desplegar la aplicacion ejecute el comando `docker-compose up` desde donde se encuentra el archivo **docker-compose.yml**
+- Espere unos minutos hasta que termine de ejecutarse todo. 
+- Finalmente visite en su navegador **localhost:80**
 
 ## Miembros
 - Juan Sebastián Getial Getial (2124644)
